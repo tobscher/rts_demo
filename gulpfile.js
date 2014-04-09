@@ -5,7 +5,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 var paths = {
-  scripts: './js/*.js',
+  scripts: ['./js/entities/*.js', './js/*.js'],
   stylesheets: './scss/*.scss'
 };
 
