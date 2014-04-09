@@ -2,6 +2,7 @@ var renderer = null
     scene = null,
     camera = null,
     hero = null,
+    stats = null,
     terrain = null;
 
 var keyboard = new THREEx.KeyboardState();
@@ -41,6 +42,8 @@ function animate() {
   camera.position.y = cameraOffset.y;
   camera.position.z = cameraOffset.z;
   camera.lookAt(hero.entity.position);
+
+  stats.update();
 }
 
 function run() {
@@ -56,8 +59,16 @@ $(document).ready(function() {
   scene.fog = new THREE.Fog(0x87CEEB, 1, 2500);
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
 
+  // Axis
   var axes = new THREE.AxisHelper(100);
   scene.add(axes);
+
+  // Stats
+  stats = new Stats();
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.bottom = '0px';
+  stats.domElement.style.zIndex = 100;
+  document.body.appendChild(stats.domElement);
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
