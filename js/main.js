@@ -74,6 +74,9 @@ $(document).ready(function() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild( renderer.domElement );
 
+  // Events
+  THREEx.WindowResize(renderer, camera);
+
   terrain = new Terrain(scene);
   hero = new Hero(scene);
   var sky = new Skybox(scene);
