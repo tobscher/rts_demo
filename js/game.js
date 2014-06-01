@@ -1,6 +1,7 @@
-function Game(scene, camera) {
+function Game(scene, camera, gui) {
   this.scene = scene;
   this.mainCamera = camera;
+  this.gui = gui;
 
   this.tree = [];
 }

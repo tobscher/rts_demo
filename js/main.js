@@ -2,7 +2,8 @@ var renderer = null
     scene = null,
     camera = null,
     stats = null,
-    game = null;
+    game = null,
+    gui = null;
 
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
@@ -55,8 +56,16 @@ $(document).ready(function() {
 
   renderer.domElement.addEventListener('mousemove', function(e) {
     var mousePos = getMousePos(renderer.domElement, e);
+    Input.mouseInsideBounds = true;
     Input.mousePosition = mousePos;
   });
+
+  $(window).mouseleave(function() {
+    Input.mouseInsideBounds = false;
+  });
+
+  // GUI
+  gui = new dat.GUI();
 
   // Events
   THREEx.WindowResize(renderer, camera);
@@ -65,7 +74,7 @@ $(document).ready(function() {
   // hero = new Hero(scene);
   // var sky = new Skybox(scene);
 
-  game = new Game(scene, camera);
+  game = new Game(scene, camera, gui);
   game.add(Skybox);
   game.add(Terrain);
   game.add(Cube);
