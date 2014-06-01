@@ -76,6 +76,7 @@ $(document).ready(function() {
 
   game = new Game(scene, camera, gui);
   game.add(Skybox);
+  game.add(Sun);
   game.add(Terrain);
   game.add(Cube);
   game.add(UserInput);
