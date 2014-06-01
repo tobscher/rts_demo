@@ -1,18 +1,18 @@
-function Terrain(scene) {
-  this.entity = this.build();
+var Terrain = GameObject.extend({
+  init: function(game) {
+    this._super(game);
 
-  scene.add(this.entity);
-}
+    this.entity = this.build();
+    game.scene.add(this.entity);
+  },
 
-Terrain.prototype.build = function(scene) {
-  var geometry = new THREE.CubeGeometry(9000,1,9000);
-  var floorTexture = new THREE.ImageUtils.loadTexture('img/ground.png');
-  // floorTexture.wrapS = floorTexture.floorTexturewrapT = THREE.RepeatWrapping;
-  // floorTexture.repeat.set(1, 10);
-  var material = new THREE.MeshBasicMaterial( { map: floorTexture } );
+  build: function() {
+    var geometry = new THREE.CubeGeometry(100,1,100);
+    var floorTexture = new THREE.ImageUtils.loadTexture('img/ground.png');
+    // floorTexture.wrapS = floorTexture.floorTexturewrapT = THREE.RepeatWrapping;
+    // floorTexture.repeat.set(1, 10);
+    var material = new THREE.MeshBasicMaterial( { map: floorTexture } );
 
-  return new THREE.Mesh(geometry, material);
-}
-
-Terrain.prototype.animate = function(delta) {
-};
+    return new THREE.Mesh(geometry, material);
+  }
+});
