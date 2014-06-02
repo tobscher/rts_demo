@@ -11,6 +11,6 @@ var WorldObject = GameObject.extend({
   },
 
   onClick: function() {
-    console.log("Clicked on " + this.name);
+    game.hud.orders.setTitle(this.name);
   }
 });

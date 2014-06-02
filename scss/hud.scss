@@ -16,4 +16,27 @@
   background-color: #aaaaaa;
   bottom: 0px;
   left: 0px;
+
+  .minimap {
+    float: left;
+    width: 25%;
+    height: 100%;
+
+    .map {
+      width: 80px;
+      height: 80px;
+      background-color: #000000;
+      margin: 10px;
+    }
+  }
+
+  .main {
+    float: left;
+    width: 50%;
+  }
+
+  .actions {
+    float: left;
+    width: 25%;
+  }
 }

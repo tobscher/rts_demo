@@ -10,7 +10,7 @@ var paths = {
     './js/core/*.js',
     './js/rts/world_object.js',
     './js/rts/*.js',
-    './js/entities/*.js',
+    './js/entities/**/*.js',
     './js/*.js'
   ],
   stylesheets: './scss/*.scss'
