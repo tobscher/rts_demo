@@ -54,7 +54,7 @@ $(document).ready(function() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild( renderer.domElement );
 
-  renderer.domElement.addEventListener('mousemove', function(e) {
+  document.body.addEventListener('mousemove', function(e) {
     var mousePos = getMousePos(renderer.domElement, e);
     Input.mouseInsideBounds = true;
     Input.mousePosition = mousePos;

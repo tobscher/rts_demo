@@ -1,0 +1,19 @@
+.hud {
+  position: absolute;
+  width: 100%;
+  opacity: 0.9;
+}
+
+#resources {
+  height: 50px;
+  background-color: #cccccc;
+  top: 0px;
+  left: 0px;
+}
+
+#orders {
+  height: 100px;
+  background-color: #aaaaaa;
+  bottom: 0px;
+  left: 0px;
+}
