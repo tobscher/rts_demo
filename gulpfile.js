@@ -5,7 +5,14 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 var paths = {
-  scripts: ['./js/plugins/*.js', './js/game_object.js', './js/entities/*.js', './js/*.js'],
+  scripts: [
+    './js/plugins/*.js',
+    './js/core/*.js',
+    './js/rts/world_object.js',
+    './js/rts/*.js',
+    './js/entities/*.js',
+    './js/*.js'
+  ],
   stylesheets: './scss/*.scss'
 };
 

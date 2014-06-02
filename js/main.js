@@ -1,6 +1,7 @@
 var renderer = null
     scene = null,
     camera = null,
+    projector = null,
     stats = null,
     game = null,
     gui = null;
@@ -50,15 +51,35 @@ $(document).ready(function() {
   stats.domElement.style.zIndex = 100;
   document.body.appendChild(stats.domElement);
 
+  projector = new THREE.Projector();
+
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild( renderer.domElement );
 
-  document.body.addEventListener('mousemove', function(e) {
+  document.addEventListener('mousemove', function(e) {
     var mousePos = getMousePos(renderer.domElement, e);
     Input.mouseInsideBounds = true;
     Input.mousePosition = mousePos;
   });
+
+  document.addEventListener('mousedown', function(event) {
+    event.preventDefault();
+
+    var vector = new THREE.Vector3(
+       (event.clientX / window.innerWidth ) * 2 - 1,
+      -(event.clientY / window.innerHeight ) * 2 + 1,
+      0.5);
+    projector.unprojectVector(vector, camera);
+
+    var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+    var intersects = raycaster.intersectObjects(game.objects(), true);
+
+    if (intersects.length > 0) {
+      //intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+      game.findByObjectId(intersects[0].object.id).onClick();
+    }
+  }, false);
 
   $(window).mouseleave(function() {
     Input.mouseInsideBounds = false;
@@ -79,6 +100,7 @@ $(document).ready(function() {
   game.add(Sun);
   game.add(Terrain);
   game.add(Cube);
+  game.add(CommandCentre);
   game.add(UserInput);
 
   run();

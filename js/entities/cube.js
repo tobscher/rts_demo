@@ -10,7 +10,7 @@ var Cube = GameObject.extend({
     var geometry = new THREE.CubeGeometry(10,4,10);
     var material = new THREE.MeshLambertMaterial( { color: "#cccccc" } );
     var mesh = new THREE.Mesh(geometry, material)
-    mesh.position.set(0,2,0);
+    mesh.position.set(0,2,-20);
 
     return mesh;
   }
