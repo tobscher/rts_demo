@@ -31,7 +31,7 @@ gulp.task('scripts.min', function() {
 
 gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['scripts']);
-  gulp.watch(paths.stylesheets, ['scss']);
+  gulp.watch(paths.stylesheets, ['sass']);
 });
 
 gulp.task('default', ['scripts', 'sass', 'watch']);
