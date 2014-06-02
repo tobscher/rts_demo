@@ -21,6 +21,8 @@ var CommandCentre = Building.extend({
     commandCentre.add(floor1);
     commandCentre.add(floor2);
 
+    commandCentre.position.set(-20, 0, 0);
+
     return commandCentre;
   }
 });

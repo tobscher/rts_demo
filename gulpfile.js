@@ -7,6 +7,7 @@ var concat = require('gulp-concat');
 var paths = {
   scripts: [
     './js/plugins/*.js',
+    './js/ext/*.js',
     './js/core/*.js',
     './js/rts/world_object.js',
     './js/rts/*.js',
