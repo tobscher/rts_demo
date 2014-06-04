@@ -12,5 +12,11 @@ var Terrain = GameObject.extend({
     var material = new THREE.MeshLambertMaterial( { map: floorTexture } );
 
     return new THREE.Mesh(geometry, material);
+  },
+
+  onClick: function(event) {
+    if (game.currentlySelected != null) {
+      game.currentlySelected.moveTo(event.position);
+    }
   }
 });

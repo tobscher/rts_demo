@@ -66,6 +66,8 @@ $(document).ready(function() {
   document.addEventListener('mousedown', function(event) {
     event.preventDefault();
 
+    var eventData = {};
+
     var vector = new THREE.Vector3(
        (event.clientX / window.innerWidth ) * 2 - 1,
       -(event.clientY / window.innerHeight ) * 2 + 1,
@@ -76,8 +78,9 @@ $(document).ready(function() {
     var intersects = raycaster.intersectObjects(game.objects(), true);
 
     if (intersects.length > 0) {
+      eventData["position"] = intersects[0].point;
       //intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
-      game.findByObjectId(intersects[0].object.id).onClick();
+      game.findByObjectId(intersects[0].object.id).onClick(eventData);
     }
   }, false);
 

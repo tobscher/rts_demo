@@ -3,9 +3,14 @@ function Game(scene, camera, gui) {
   this.mainCamera = camera;
   this.gui = gui;
   this.hud = new HUD();
+  this.selection = new Selection(this);
+  this.selection.entity.material.visible = false;
+  this.scene.add(this.selection);
 
   this.tree = [];
   this.objectMap = {};
+
+  this.currentlySelected = null;
 }
 
 Game.prototype.add = function(klass, options) {

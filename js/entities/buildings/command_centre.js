@@ -1,9 +1,6 @@
 var CommandCentre = Building.extend({
   init: function(game, name) {
     this._super(game, "Command Centre");
-
-    this.entity = this.build();
-    game.scene.add(this.entity);
   },
 
   build: function() {
