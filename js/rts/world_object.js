@@ -26,8 +26,6 @@ var WorldObject = GameObject.extend({
     }
     this.selected = true;
     this.game.selection.entity.material.visible = true;
-    this.game.selection.entity.position.setX(this.entity.position.x);
-    this.game.selection.entity.position.setZ(this.entity.position.z);
 
     var max = Math.max(this.box.size().x, this.box.size().z) * 0.75;
 
@@ -36,6 +34,8 @@ var WorldObject = GameObject.extend({
     this.game.selection.entity.scale.z = max;
 
     this.game.currentlySelected = this;
+
+    this.entity.add(this.game.selection.entity);
   },
 
   toggle: function(visible) {

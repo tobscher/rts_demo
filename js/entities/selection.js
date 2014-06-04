@@ -3,7 +3,6 @@ var Selection = GameObject.extend({
     this._super(game);
 
     this.entity = this.build();
-    game.scene.add(this.entity);
   },
 
   build: function() {
