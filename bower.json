@@ -1,11 +1,11 @@
 {
-  "name": "rpg",
+  "name": "rts",
   "version": "0.0.1",
   "authors": [
     "Tobias Haar <tobias.haar@gmail.com>"
   ],
   "dependencies": {},
-  "description": "RPG Game",
+  "description": "RTS Game",
   "license": "MIT",
   "ignore": [
     "**/.*",
