@@ -8,8 +8,10 @@ var Terrain = GameObject.extend({
   },
 
   build: function() {
-    var geometry = new THREE.BoxGeometry(100,1,100);
+    var geometry = new THREE.BoxGeometry(1000,1,1000);
     var floorTexture = new THREE.ImageUtils.loadTexture('img/ground.png');
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.repeat.set( 25, 25 );
     var material = new THREE.MeshLambertMaterial( { map: floorTexture } );
 
     return new THREE.Mesh(geometry, material);
