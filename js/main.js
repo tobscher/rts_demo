@@ -36,8 +36,8 @@ function getMousePos(canvas, evt) {
 $(document).ready(function() {
   scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x87CEEB, 1, 2500);
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.set(0, 20, -20);
+  camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
+  camera.position.set(0, 100, -50);
   camera.lookAt(scene.position);
 
   // Axis
