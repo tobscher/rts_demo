@@ -1,10 +1,3 @@
-// var SCROLL_WIDTH = 15;
-// var SCROLL_SPEED = 25;
-// var ROTATE_SPEED = 100;
-
-// var MIN_CAMERA_HEIGHT = 10;
-// var MAX_CAMERA_HEIGHT = 40;
-
 var UserInput = GameObject.extend({
   init: function(game) {
     this._super(game);
