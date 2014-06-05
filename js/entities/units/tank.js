@@ -13,8 +13,8 @@ var Tank = Unit.extend({
     var material = new THREE.MeshLambertMaterial( { color: "#dddddd" } );
 
     // Geometries
-    var bodyGeometry = new THREE.CubeGeometry(3,0.5,1.5);
-    var turretGeometry = new THREE.CubeGeometry(1,1,1);
+    var bodyGeometry = new THREE.BoxGeometry(3,0.5,1.5);
+    var turretGeometry = new THREE.BoxGeometry(1,1,1);
     var muzzleGeometry = new THREE.CylinderGeometry(0.2, 0.2, 2, 32);
 
     // Meshes

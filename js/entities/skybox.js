@@ -7,7 +7,7 @@ var Skybox = GameObject.extend({
   },
 
   build: function() {
-    var geometry = new THREE.CubeGeometry(5000,5000,5000);
+    var geometry = new THREE.BoxGeometry(5000,5000,5000);
     var material = new THREE.MeshBasicMaterial( { color: 0x87CEEB, side: THREE.BackSide } );
 
     var mesh = new THREE.Mesh(geometry, material);
