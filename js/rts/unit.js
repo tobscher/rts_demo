@@ -6,9 +6,11 @@ var Unit = WorldObject.extend({
     this.rotating = false
     this.movementSpeed = 15.0;
     this.rotatingSpeed = 50.0;
+    this.startMovingThreshold = 0.3;
 
     this.game.gui.add(this, 'movementSpeed');
     this.game.gui.add(this, 'rotatingSpeed');
+    this.game.gui.add(this, 'startMovingThreshold');
   },
 
   onUpdate: function(delta) {
@@ -44,16 +46,24 @@ var Unit = WorldObject.extend({
   },
 
   turnToTarget: function(delta) {
-    // TODO: Think about how to make that smooth.
     var rotation = new THREE.Quaternion();
-    var result = THREE.Quaternion.slerp(this.entity.quaternion, this.destinationRotation, rotation, 0.8 * delta * this.rotatingSpeed);
+    var alpha = Math.min(1, this.rotationStep);
+    var result = THREE.Quaternion.slerp(this.entity.quaternion, this.destinationRotation, rotation, alpha);
 
     this.entity.quaternion.copy(rotation);
+    this.rotationStep += (delta * this.rotatingSpeed * 0.1);
 
-    if (Float.compare(this.entity.quaternion.eulerAngle().y, this.destinationRotation.eulerAngle().y, 0.01)) {
-      this.rotating = false;
+    if (this.isInMovablePosition()) {
       this.moving = true;
     }
+
+    if (alpha == 1) {
+      this.rotating = false;
+    }
+  },
+
+  isInMovablePosition: function() {
+    return Float.compare(this.entity.quaternion.eulerAngle().y, this.destinationRotation.eulerAngle().y, this.startMovingThreshold);
   },
 
   moveTo: function(destination) {
@@ -65,7 +75,8 @@ var Unit = WorldObject.extend({
     this.destinationRotation = this.entity.quaternion.clone();
     this.destinationRotation.setFromRotationMatrix(m1);
     this.invertedDestinationRotation = this.destinationRotation.clone().inverse();
+    this.rotationStep = 0;
     this.rotating = true;
-    this.moving = false;
+    this.moving = this.isInMovablePosition();
   }
 });

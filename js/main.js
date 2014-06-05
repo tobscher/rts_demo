@@ -64,7 +64,7 @@ $(document).ready(function() {
   });
 
   document.addEventListener('mousedown', function(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     var eventData = {};
 

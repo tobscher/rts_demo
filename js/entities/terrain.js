@@ -2,6 +2,7 @@ var Terrain = GameObject.extend({
   init: function(game) {
     this._super(game);
 
+    this.clickCircle = new ClickCircle(game);
     this.entity = this.build();
     game.scene.add(this.entity);
   },
@@ -16,6 +17,7 @@ var Terrain = GameObject.extend({
 
   onClick: function(event) {
     if (game.currentlySelected != null) {
+      this.clickCircle.show(event.position);
       game.currentlySelected.moveTo(event.position);
     }
   }
