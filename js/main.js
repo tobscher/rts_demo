@@ -47,7 +47,7 @@ $(document).ready(function() {
   // Stats
   stats = new Stats();
   stats.domElement.style.position = 'absolute';
-  stats.domElement.style.bottom = '0px';
+  stats.domElement.style.top = '0px';
   stats.domElement.style.zIndex = 100;
   document.body.appendChild(stats.domElement);
 
