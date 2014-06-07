@@ -13,6 +13,7 @@ var CommandCentre = Building.extend({
       scope.entity.scale.set(5, 5, 5);
 
       game.scene.add(scope.entity);
+      game.index(scope);
 
       scope.calculateBounds();
     });
