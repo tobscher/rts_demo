@@ -86,7 +86,6 @@ $(document).ready(function() {
   // Firefox
   document.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
 
-
   document.addEventListener('mousedown', function(event) {
     // event.preventDefault();
 

@@ -6,12 +6,15 @@ var UserInput = GameObject.extend({
     this.scrollSpeed = 50;
     this.minCameraHeight = 50;
     this.maxCameraHeight = 120;
+    this.zoomSpeed = 10;
 
     this.targetCameraHeight = game.mainCamera.position.y;
 
     this.game.gui.add(this, 'scrollWidth');
     this.game.gui.add(this, 'scrollSpeed');
-    this.game.gui.add(this.game.mainCamera.position, 'y');
+    this.game.gui.add(this, 'minCameraHeight');
+    this.game.gui.add(this, 'maxCameraHeight');
+    this.game.gui.add(this, 'zoomSpeed');
   },
 
   onUpdate: function(delta) {
@@ -42,16 +45,30 @@ var UserInput = GameObject.extend({
       movement.z += this.scrollSpeed;
     }
 
+    movement.y = origin.y - this.targetCameraHeight;
+
     // calculate desired camera position based on received input
     var destination = origin.clone();
     destination.x -= movement.x * delta;
-    destination.y = this.targetCameraHeight;
+    destination.y -= movement.y * delta;
     destination.z -= movement.z * delta;
 
     if (destination.y > this.maxCameraHeight) {
       destination.y = this.maxCameraHeight;
+      this.targetCameraHeight = this.maxCameraHeight;
     } else if (destination.y < this.minCameraHeight) {
       destination.y = this.minCameraHeight;
+      this.targetCameraHeight = this.minCameraHeight;
+    }
+
+    if (movement.y < 0) {
+      if (destination.y > this.targetCameraHeight) {
+        destination.y = this.targetCameraHeight;
+      }
+    } else if (movement.y > 0) {
+      if (destination.y < this.targetCameraHeight) {
+        destination.y = this.targetCameraHeight;
+      }
     }
 
     // if a change in position is detected perform the necessary update
@@ -64,18 +81,15 @@ var UserInput = GameObject.extend({
   },
 
   zoomIn: function() {
-    this.zoom(-1);
+    this.zoom(-this.zoomSpeed);
   },
 
   zoomOut: function() {
-    this.zoom(1);
+    this.zoom(this.zoomSpeed);
   },
 
   zoom: function(direction) {
     var newHeight = this.targetCameraHeight + direction;
-
-    if (newHeight > this.maxCameraHeight) return;
-    if (newHeight < this.minCameraHeight) return;
 
     this.targetCameraHeight = newHeight;
   }
