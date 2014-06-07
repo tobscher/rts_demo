@@ -4,7 +4,10 @@ var renderer = null
     projector = null,
     stats = null,
     game = null,
-    gui = null;
+    gui = null,
+    mapCamera = null,
+    mapWidth = 100,
+    mapHeight = 100;
 
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
@@ -20,7 +23,14 @@ function animate() {
 function run() {
   requestAnimationFrame(function() { run(); });
 
+  var w = window.innerWidth, h = window.innerHeight;
+
+  renderer.setViewport( 0, 0, w, h );
+  renderer.clear();
   renderer.render(scene, camera);
+
+  renderer.setViewport(10, 10, mapWidth, mapHeight );
+  renderer.render(scene, mapCamera);
 
   animate();
 }
@@ -34,11 +44,33 @@ function getMousePos(canvas, evt) {
 }
 
 $(document).ready(function() {
+  // Scene
   scene = new THREE.Scene();
+
+  // Fog
   scene.fog = new THREE.Fog(0x87CEEB, 1, 2500);
+
+  // Main Camera
   camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.set(0, 100, -50);
+  camera.position.set(0, 100, 50);
   camera.lookAt(scene.position);
+  scene.add(camera);
+
+  // Map Camera
+  // This should match terrain width/height
+  var width = 1000;
+  var height = 1000;
+
+  mapCamera = new THREE.OrthographicCamera(
+    width / -2,   // Left
+    width / 2,    // Right
+    height / 2,   // Top
+    height / -2,  // Bottom
+    -5000,                  // Near
+    10000 );                // Far
+  mapCamera.up = new THREE.Vector3(0,0,-1);
+  mapCamera.lookAt( new THREE.Vector3(0,-1,0) );
+  scene.add(mapCamera);
 
   // Axis
   var axes = new THREE.AxisHelper(100);
@@ -51,11 +83,18 @@ $(document).ready(function() {
   stats.domElement.style.zIndex = 100;
   document.body.appendChild(stats.domElement);
 
+  // Projectors
   projector = new THREE.Projector();
 
+  // Renderer
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 1);
+  renderer.autoClear = false;
   document.body.appendChild( renderer.domElement );
+
+  // Events
+  THREEx.WindowResize(renderer, camera);
 
   document.addEventListener('mousemove', function(e) {
     var mousePos = getMousePos(renderer.domElement, e);
@@ -113,9 +152,6 @@ $(document).ready(function() {
 
   // GUI
   gui = new dat.GUI();
-
-  // Events
-  THREEx.WindowResize(renderer, camera);
 
   // terrain = new Terrain(scene);
   // hero = new Hero(scene);

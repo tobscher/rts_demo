@@ -50,9 +50,9 @@ var UserInput = GameObject.extend({
 
     // calculate desired camera position based on received input
     var destination = origin.clone();
-    destination.x -= movement.x * delta;
+    destination.x += movement.x * delta;
     destination.y -= movement.y * delta;
-    destination.z -= movement.z * delta;
+    destination.z += movement.z * delta;
 
     if (destination.y > this.maxCameraHeight) {
       destination.y = this.maxCameraHeight;
