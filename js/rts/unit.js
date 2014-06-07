@@ -8,9 +8,10 @@ var Unit = WorldObject.extend({
     this.rotatingSpeed = 50.0;
     this.startMovingThreshold = 0.3;
 
-    this.game.gui.add(this, 'movementSpeed');
-    this.game.gui.add(this, 'rotatingSpeed');
-    this.game.gui.add(this, 'startMovingThreshold');
+    var folder = this.game.gui.addFolder("Unit");
+    folder.add(this, 'movementSpeed');
+    folder.add(this, 'rotatingSpeed');
+    folder.add(this, 'startMovingThreshold');
   },
 
   onUpdate: function(delta) {

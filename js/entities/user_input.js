@@ -10,11 +10,12 @@ var UserInput = GameObject.extend({
 
     this.targetCameraHeight = game.mainCamera.position.y;
 
-    this.game.gui.add(this, 'scrollWidth');
-    this.game.gui.add(this, 'scrollSpeed');
-    this.game.gui.add(this, 'minCameraHeight');
-    this.game.gui.add(this, 'maxCameraHeight');
-    this.game.gui.add(this, 'zoomSpeed');
+    var folder = this.game.gui.addFolder("Input");
+    folder.add(this, 'scrollWidth');
+    folder.add(this, 'scrollSpeed');
+    folder.add(this, 'minCameraHeight');
+    folder.add(this, 'maxCameraHeight');
+    folder.add(this, 'zoomSpeed');
   },
 
   onUpdate: function(delta) {
