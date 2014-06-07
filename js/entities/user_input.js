@@ -1,12 +1,17 @@
 var UserInput = GameObject.extend({
   init: function(game) {
-    this._super(game);
+    this._super(game, "UserInput");
 
     this.scrollWidth = 15;
-    this.scrollSpeed = 25;
+    this.scrollSpeed = 50;
+    this.minCameraHeight = 50;
+    this.maxCameraHeight = 120;
+
+    this.targetCameraHeight = game.mainCamera.position.y;
 
     this.game.gui.add(this, 'scrollWidth');
     this.game.gui.add(this, 'scrollSpeed');
+    this.game.gui.add(this.game.mainCamera.position, 'y');
   },
 
   onUpdate: function(delta) {
@@ -22,48 +27,56 @@ var UserInput = GameObject.extend({
     var xpos = Input.mousePosition.x;
     var ypos = Input.mousePosition.y;
     var movement = new THREE.Vector3(0,0,0);
+    var origin = game.mainCamera.position;
 
-    if(xpos >= 0 && xpos < this.scrollWidth) {
-        movement.x -= this.scrollSpeed;
-    } else if(xpos <= window.innerWidth && xpos > window.innerWidth - this.scrollWidth) {
-        movement.x += this.scrollSpeed;
+    if (xpos >= 0 && xpos < this.scrollWidth) {
+      movement.x -= this.scrollSpeed;
+    } else if (xpos <= window.innerWidth && xpos > window.innerWidth - this.scrollWidth) {
+      movement.x += this.scrollSpeed;
     }
 
     // vertical camera movement
-    if(ypos >= 0 && ypos < this.scrollWidth) {
-        movement.z -= this.scrollSpeed;
-    } else if(ypos <= window.innerHeight && ypos > window.innerHeight - this.scrollWidth) {
-        movement.z += this.scrollSpeed;
+    if (ypos >= 0 && ypos < this.scrollWidth) {
+      movement.z -= this.scrollSpeed;
+    } else if (ypos <= window.innerHeight && ypos > window.innerHeight - this.scrollWidth) {
+      movement.z += this.scrollSpeed;
     }
 
-    // make sure movement is in the direction the camera is pointing
-    // but ignore the vertical tilt of the camera to get sensible scrolling
-    // movement = game.mainCamera.transform.TransformDirection(movement);
-    // movement.y = 0;
-
-    // away from ground movement
-    // movement.y -= ResourceManager.ScrollSpeed * Input.GetAxis("Mouse ScrollWheel");
-
     // calculate desired camera position based on received input
-    var origin = game.mainCamera.position;
     var destination = origin.clone();
-    destination.x -= movement.x;
-    destination.y -= movement.y;
-    destination.z -= movement.z;
+    destination.x -= movement.x * delta;
+    destination.y = this.targetCameraHeight;
+    destination.z -= movement.z * delta;
 
-    // limit away from ground movement to be between a minimum and maximum distance
-    // if(destination.y > MAX_CAMERA_HEIGHT) {
-    //   destination.y = MAX_CAMERA_HEIGHT;
-    // } else if(destination.y < MIN_CAMERA_HEIGHT) {
-    //   destination.y = MIN_CAMERA_HEIGHT;
-    // }
+    if (destination.y > this.maxCameraHeight) {
+      destination.y = this.maxCameraHeight;
+    } else if (destination.y < this.minCameraHeight) {
+      destination.y = this.minCameraHeight;
+    }
 
     // if a change in position is detected perform the necessary update
-    if (destination != origin) {
-      game.mainCamera.position.lerp(destination, 0.1 * delta * this.scrollSpeed);
+    if (!destination.equals(origin)) {
+      this.game.mainCamera.position.copy(destination);
     }
   },
 
   rotateCamera: function() {
+  },
+
+  zoomIn: function() {
+    this.zoom(-1);
+  },
+
+  zoomOut: function() {
+    this.zoom(1);
+  },
+
+  zoom: function(direction) {
+    var newHeight = this.targetCameraHeight + direction;
+
+    if (newHeight > this.maxCameraHeight) return;
+    if (newHeight < this.minCameraHeight) return;
+
+    this.targetCameraHeight = newHeight;
   }
 });

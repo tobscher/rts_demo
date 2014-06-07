@@ -1,12 +1,10 @@
 var WorldObject = GameObject.extend({
   init: function(game, name) {
-    this._super(game);
-
+    this._super(game, name);
 
     this.entity = this.build();
     game.scene.add(this.entity);
 
-    this.name = name;
     this.selected = false;
     this.calculcateBounds();
   },

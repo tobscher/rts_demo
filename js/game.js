@@ -37,6 +37,14 @@ Game.prototype.findByObjectId = function(objectId) {
   return this.objectMap[objectId];
 }
 
+Game.prototype.findByName = function(name) {
+  for (var i = 0; i < this.tree.length; i++) {
+    if (this.tree[i].name == name) {
+      return this.tree[i];
+    }
+  }
+}
+
 Game.prototype.objects = function() {
   var list = [];
   for(var key in this.objectMap) {

@@ -63,6 +63,30 @@ $(document).ready(function() {
     Input.mousePosition = mousePos;
   });
 
+  function MouseWheelHandler(e) {
+    e.preventDefault();
+
+    var delta = 0;
+
+    if ( event.wheelDelta ) { // WebKit / Opera / Explorer 9
+      delta = event.wheelDelta;
+    } else if ( event.detail ) { // Firefox
+      delta = - event.detail;
+    }
+
+    if ( delta > 0 ) {
+      game.findByName("UserInput").zoomOut();
+    } else {
+      game.findByName("UserInput").zoomIn();
+    }
+  }
+
+  // IE9, Chrome, Safari, Opera
+  document.addEventListener("mousewheel", MouseWheelHandler, false);
+  // Firefox
+  document.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+
+
   document.addEventListener('mousedown', function(event) {
     // event.preventDefault();
 
