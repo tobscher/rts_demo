@@ -16,13 +16,17 @@ Game.prototype.add = function(klass, options) {
   var gameObject = new klass(this);
   this.tree.push(gameObject);
 
+  // Object already built, so start indexing
   if (typeof(gameObject.entity) != 'undefined') {
-    this.objectMap[gameObject.entity.id] = gameObject;
+    this.index(gameObject);
+  }
+}
 
-    if (gameObject.entity.children.length > 0) {
-      for (var i = 0; i < gameObject.entity.children.length; i++) {
-        this.objectMap[gameObject.entity.children[i].id] = gameObject;
-      }
+Game.prototype.index = function(gameObject) {
+  this.objectMap[gameObject.entity.id] = gameObject;
+  if (gameObject.entity.children.length > 0) {
+    for (var i = 0; i < gameObject.entity.children.length; i++) {
+      this.objectMap[gameObject.entity.children[i].id] = gameObject;
     }
   }
 }

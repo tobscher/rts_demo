@@ -2,11 +2,15 @@ var WorldObject = GameObject.extend({
   init: function(game, name) {
     this._super(game, name);
 
-    this.entity = this.build();
-    game.scene.add(this.entity);
+    if (typeof this.build != 'undefined') {
+      this.entity = this.build();
+      game.scene.add(this.entity);
+      this.calculateBounds();
+    } else {
+      this.preload();
+    }
 
     this.selected = false;
-    this.calculcateBounds();
   },
 
   onUpdate: function(delta) {
@@ -48,7 +52,7 @@ var WorldObject = GameObject.extend({
     this.toggle(true);
   },
 
-  calculcateBounds: function() {
+  calculateBounds: function() {
     if (typeof this.entity.geometry == 'undefined') {
       var box = new THREE.Box3();
     } else {

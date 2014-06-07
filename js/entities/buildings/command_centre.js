@@ -3,23 +3,18 @@ var CommandCentre = Building.extend({
     this._super(game, "Command Centre");
   },
 
-  build: function() {
-    var commandCentre = new THREE.Object3D();
+  preload: function() {
+    var scope = this;
 
-    var material = new THREE.MeshLambertMaterial( { color: "#cccccc" } );
-    var floor1Geometry = new THREE.BoxGeometry(10,4,10);
-    var floor2Geometry = new THREE.BoxGeometry(5,4,5);
-    var floor1 = new THREE.Mesh(floor1Geometry, material)
-    floor1.position.set(0,2,0);
+    var loader = new THREE.JSONLoader();
+    loader.load("js/models/CommandCentre.json", function(geometry, materials) {
+      scope.entity = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+      scope.entity.rotation.y = Math.PI / 1.5;
+      scope.entity.scale.set(5, 5, 5);
 
-    var floor2 = new THREE.Mesh(floor2Geometry, material)
-    floor2.position.set(0,6,0);
+      game.scene.add(scope.entity);
 
-    commandCentre.add(floor1);
-    commandCentre.add(floor2);
-
-    commandCentre.position.set(-20, 0, 0);
-
-    return commandCentre;
+      scope.calculateBounds();
+    });
   }
 });

@@ -125,7 +125,6 @@ $(document).ready(function() {
   game.add(Skybox);
   game.add(Sun);
   game.add(Terrain);
-  game.add(Cube);
   game.add(CommandCentre);
   game.add(Tank);
   game.add(UserInput);
