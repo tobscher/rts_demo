@@ -3,6 +3,7 @@ var Selection = GameObject.extend({
     this._super(game);
 
     this.entity = this.build();
+    this.entity.material.visible = false;
   },
 
   build: function() {

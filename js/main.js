@@ -153,10 +153,6 @@ $(document).ready(function() {
   // GUI
   gui = new dat.GUI();
 
-  // terrain = new Terrain(scene);
-  // hero = new Hero(scene);
-  // var sky = new Skybox(scene);
-
   game = new Game(scene, camera, gui);
   game.add(Skybox);
   game.add(Sun);
