@@ -27,21 +27,9 @@ var Unit = WorldObject.extend({
   },
 
   makeMove: function(delta) {
-    var currentPosition = this.entity.position.clone();
-    var destination = this.destination.clone();
+    this.entity.position = THREE.Vector3.MoveTowards(this.entity.position, this.destination, delta * this.movementSpeed);
 
-    var direction = destination.sub(currentPosition).normalize();
-
-    // TODO: Use lerp
-    var floorFuncX = direction.x > 0 ? Math.min : Math.max;
-    var floorFuncZ = direction.z > 0 ? Math.min : Math.max;
-
-    this.entity.position.x = floorFuncX(this.entity.position.x + (direction.x * delta * this.movementSpeed),
-        this.destination.x);
-    this.entity.position.z = floorFuncZ(this.entity.position.z + (direction.z * delta * this.movementSpeed),
-        this.destination.z);
-
-    if (this.destination == this.entity.position) {
+    if (this.destination.equals(this.entity.position)) {
       this.moving = false;
     }
   },
