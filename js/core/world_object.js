@@ -23,21 +23,15 @@ var WorldObject = GameObject.extend({
   },
 
   select: function() {
-    if (this.game.currentlySelected != null) {
-      this.game.currentlySelected.selected = false;
+    if (this.game.player.currentlySelected != null) {
+      this.game.player.currentlySelected.selected = false;
     }
     this.selected = true;
-    this.game.selection.entity.material.visible = true;
+    this.game.player.select(this);
 
-    var max = Math.max(this.box.size().x, this.box.size().z) * 0.75;
 
-    this.game.selection.entity.scale.x = max;
-    this.game.selection.entity.scale.y = max;
-    this.game.selection.entity.scale.z = max;
-
-    this.game.currentlySelected = this;
-
-    this.entity.add(this.game.selection.entity);
+    this.game.player.currentlySelected = this;
+    this.entity.add(this.game.player.getBehaviour(Selection).entity);
   },
 
   toggle: function(visible) {

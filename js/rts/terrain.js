@@ -18,9 +18,9 @@ var Terrain = GameObject.extend({
   },
 
   onClick: function(event) {
-    if (game.currentlySelected != null) {
+    if (this.game.player.currentlySelected != null) {
       this.clickCircle.show(event.position);
-      game.currentlySelected.moveTo(event.position);
+      this.game.player.currentlySelected.moveTo(event.position);
     }
   }
 });

@@ -8,10 +8,10 @@ var paths = {
   scripts: [
     './js/plugins/*.js',
     './js/ext/*.js',
+    './js/core/game_object.js',
+    './js/core/world_object.js',
     './js/core/*.js',
-    './js/rts/world_object.js',
-    './js/rts/*.js',
-    './js/entities/**/*.js',
+    './js/rts/**/*.js',
     './js/*.js'
   ],
   stylesheets: './scss/*.scss'

@@ -154,12 +154,15 @@ $(document).ready(function() {
   gui = new dat.GUI();
 
   game = new Game(scene, camera, gui);
+  // Environment
   game.add(Skybox);
   game.add(Sun);
+
+  // Map
   game.add(Terrain);
+
   game.add(CommandCentre);
   game.add(Tank);
-  game.add(UserInput);
 
   run();
 });

@@ -2,8 +2,9 @@ function Game(scene, camera, gui) {
   this.scene = scene;
   this.mainCamera = camera;
   this.gui = gui;
+
+  this.player = new Player(this);
   this.hud = new HUD();
-  this.selection = new Selection(this);
 
   this.tree = [];
   this.objectMap = {};
