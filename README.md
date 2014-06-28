@@ -1,2 +1,1 @@
-rts_demo
-========
+# RTS Demo
