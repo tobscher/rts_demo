@@ -1,12 +1,12 @@
 RTS.Game = function() {
-
-};
-
-RTS.Game.prototype.start = function() {
   // Create Vizi application
   var container = document.getElementById("container");
-  var app = new Vizi.Application({ container: container });
+  this.app = new Vizi.Application({ container: container });
 
+  this.initializeGame();
+};
+
+RTS.Game.prototype.initializeGame = function() {
   // Create a phong-shaded cube
   var cube = new Vizi.Object;
   var visual = new Vizi.Visual({
@@ -27,9 +27,16 @@ RTS.Game.prototype.start = function() {
   light.addComponent(new Vizi.DirectionalLight);
 
   // Add cube and light to the scene
-  app.addObject(cube);
-  app.addObject(light);
-
-  // Run the app
-  app.run();
+  this.app.addObject(cube);
+  this.app.addObject(light);
 };
+
+RTS.Game.prototype.run = function() {
+  // Run the app
+  this.app.run();
+};
+
+RTS.Game.prototype.startMatch = function(match) {
+  match.start();
+  this.currentMatch = match;
+}

@@ -15,8 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'js/plugins/klass.js',
-      'test/**/*Spec.js'
+      'js/plugins/jquery-1.11.1.min.js',
+      'js/plugins/Vizi/engine/build/vizi.js',
+      // Code to test
+      'js/rts.js',
+      'js/rts/game.js',
+      'js/rts/match.js',
+      // Tests
+      'test/**/*Spec.js',
     ],
 
 

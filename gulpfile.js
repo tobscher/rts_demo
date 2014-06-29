@@ -7,7 +7,8 @@ var concat = require('gulp-concat');
 var paths = {
   scripts: [
     './js/rts.js',
-    './js/rts/game.js'
+    './js/rts/game.js',
+    './js/rts/match.js'
   ],
   stylesheets: './scss/*.scss'
 };

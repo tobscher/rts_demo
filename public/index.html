@@ -19,7 +19,10 @@
     <script src="js/application.js"></script>
     <script>
       var game = new RTS.Game();
-      game.start();
+      var match = new RTS.Match();
+
+      game.run();
+      game.startMatch(match);
     </script>
   </body>
 </html>
