@@ -2,6 +2,7 @@ RTS.Game = function() {
   // Create Vizi application
   var container = document.getElementById("container");
   this.app = new Vizi.Application({ container: container });
+  this.running = false;
 
   this.initializeGame();
 };
@@ -34,6 +35,7 @@ RTS.Game.prototype.initializeGame = function() {
 RTS.Game.prototype.run = function() {
   // Run the app
   this.app.run();
+  this.running = true;
 };
 
 RTS.Game.prototype.startMatch = function(match) {
