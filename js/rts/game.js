@@ -8,28 +8,46 @@ RTS.Game = function() {
 };
 
 RTS.Game.prototype.initializeGame = function() {
-  // Create a phong-shaded cube
-  var cube = new Vizi.Object;
-  var visual = new Vizi.Visual({
-    geometry: new THREE.CubeGeometry(2,2,2),
-    material: new THREE.MeshPhongMaterial({ color: 0xcccccc })
-  });
-  cube.addComponent(visual);
+  this.addLight();
+  this.addCamera();
+  this.addController();
 
-  // Add rotation behaviour
-  var rotator = new Vizi.RotateBehavior({autoStart:true});
-  cube.addComponent(rotator);
+  // Override camera position from controller
+  this.cam.position.set(0, 100, 50);
+  this.cam.lookAt(new THREE.Vector3(0,0,0));
+};
 
-  // Rotate cube to demonstrate 3D
-  cube.transform.rotation.x = Math.PI / 5;
+RTS.Game.prototype.addController = function() {
+  var controller = Vizi.Prefabs.ModelController({active:true});
+  var controllerScript = controller.getComponent(Vizi.ModelControllerScript);
+  controllerScript.camera = this.cam;
+  this.app.addObject(controller);
+};
 
-  // Create light to show shading
+RTS.Game.prototype.addLight = function() {
   var light = new Vizi.Object;
-  light.addComponent(new Vizi.DirectionalLight);
+  var directionalLight = new Vizi.DirectionalLight({
+    intensity: 1,
+    direction: new THREE.Vector3(0, -1, 0)
+  });
+  directionalLight.position.set(0,1,0);
+  light.addComponent(directionalLight);
 
-  // Add cube and light to the scene
-  this.app.addObject(cube);
+  // Add light to the scene
   this.app.addObject(light);
+};
+
+RTS.Game.prototype.addCamera = function() {
+  this.cam = new Vizi.PerspectiveCamera({
+    active: true,
+    fov: 30,
+    near: 1,
+    far: 10000
+  });
+  var camera = new Vizi.Object;
+  camera.addComponent(this.cam);
+
+  this.app.addObject(camera);
 };
 
 RTS.Game.prototype.run = function() {

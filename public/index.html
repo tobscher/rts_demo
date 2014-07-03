@@ -15,11 +15,12 @@
   </head>
   <body>
     <div id="container"></div>
-    <script src="js/vizi.min.js"></script>
+    <script src="js/vizi.js"></script>
     <script src="js/application.js"></script>
     <script>
       var game = new RTS.Game();
-      var match = new RTS.Match();
+      var map = new RTS.Map();
+      var match = new RTS.Match({map: map});
 
       game.run();
       game.startMatch(match);
