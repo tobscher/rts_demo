@@ -29,6 +29,8 @@ RTS.Map = function(options) {
     clickCircleScript.showAt(event.point);
   });
 
+  map.addComponent(new RTS.EdgeScrollingScript({ camera: Vizi.Services.graphics.camera }));
+
   map.addChild(clickCircle);
 
   return map;

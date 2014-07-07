@@ -43,6 +43,8 @@ RTS.ClickCircleScript.prototype.realize = function() {
 };
 
 RTS.ClickCircleScript.prototype.update = function() {
+  if (!this.animating) return;
+
   var visual = this._object.getComponent(Vizi.Visual);
   this.animationStep += 0.04;
   visual.scale.sub(new THREE.Vector3(0.01, 0.01, 0.01));

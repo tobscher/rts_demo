@@ -1,7 +1,7 @@
 RTS.Game = function() {
   // Create Vizi application
   var container = document.getElementById("container");
-  this.app = new Vizi.Application({ container: container });
+  this.app = new Vizi.Application({ container: container, displayStats: true });
   this.running = false;
 
   this.initializeGame();
@@ -11,16 +11,11 @@ RTS.Game.prototype.initializeGame = function() {
   this.addLight();
   this.addCamera();
   this.addController();
-
-  // Override camera position from controller
-  this.cam.position.set(0, 100, 50);
-  this.cam.lookAt(new THREE.Vector3(0,0,0));
 };
 
 RTS.Game.prototype.addController = function() {
-  var controller = Vizi.Prefabs.ModelController({active:true});
-  var controllerScript = controller.getComponent(Vizi.ModelControllerScript);
-  controllerScript.camera = this.cam;
+  var controller = new RTS.MainController(this.cam);
+
   this.app.addObject(controller);
 };
 
@@ -44,6 +39,11 @@ RTS.Game.prototype.addCamera = function() {
     near: 1,
     far: 10000
   });
+
+  // Override camera position from controller
+  this.cam.position.set(0, 100, 50);
+  this.cam.lookAt(Vizi.Services.graphics.scene.position);
+
   var camera = new Vizi.Object;
   camera.addComponent(this.cam);
 
