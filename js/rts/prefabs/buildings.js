@@ -1,0 +1,1 @@
+RTS.Buildings = RTS.Buildings || {};

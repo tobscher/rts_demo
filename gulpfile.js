@@ -10,6 +10,8 @@ var paths = {
     './js/rts.js',
     './js/rts/controllers/*.js',
     './js/rts/prefabs/*.js',
+    './js/rts/prefabs/buildings/*.js',
+    './js/rts/prefabs/units/*.js',
     './js/rts/game.js',
     './js/rts/match.js'
   ],

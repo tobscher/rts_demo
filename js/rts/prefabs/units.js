@@ -1,0 +1,1 @@
+RTS.Units = RTS.Units || {};
