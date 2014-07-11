@@ -1,30 +1,13 @@
-RTS.Buildings.CommandCentre = function(object) {
+RTS.Buildings.CommandCentre = function(object, options) {
+  options = options || {};
+  object.name = "Command Centre";
+
+  RTS.WorldObject.call(this, object, options);
+
   object.transform.scale.set(5, 5, 5);
   return object;
 };
 
 RTS.Buildings.CommandCentre.load = function(loader) {
-  loader.loadModel("js/models/CommandCentre.js", RTS.Buildings.CommandCentre);
+  loader.loadModel("js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: { radius: 2} });
 };
-
-// var CommandCentre = Building.extend({
-//   init: function(game, name) {
-//     this._super(game, "Command Centre");
-//   },
-
-//   preload: function() {
-//     var scope = this;
-
-//     var loader = new THREE.JSONLoader();
-//     loader.load("js/models/CommandCentre.json", function(geometry, materials) {
-//       scope.entity = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-//       scope.entity.rotation.y = Math.PI / 1.5;
-//       scope.entity.scale.set(5, 5, 5);
-
-//       game.scene.add(scope.entity);
-//       game.index(scope);
-
-//       scope.calculateBounds();
-//     });
-//   }
-// });
