@@ -14,10 +14,11 @@ RTS.Match.prototype.loadWorldObject = function(worldObject) {
 };
 
 RTS.Match.prototype.addStartpoint = function() {
+  var that = this;
   this.loader = new Vizi.Loader();
   this.loader.addEventListener("loaded", function(data) {
     var model = data.userData.type(data.scene, data.userData.options);
-    Vizi.Application.instance.addObject(model);
+    that.map.addChild(model);
   });
 
   RTS.Buildings.CommandCentre.load(this.loader);

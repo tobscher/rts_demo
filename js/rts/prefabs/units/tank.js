@@ -6,6 +6,14 @@ RTS.Units.Tank = function(object, options) {
 
   object.transform.scale.set(5, 5, 5);
   object.transform.position.set(20, 0, 0);
+
+  var move = new RTS.Abilities.Move();
+  object.addComponent(move);
+
+  object.handleMapClicked = function(position) {
+    move.mapClicked(position);
+  }
+
   return object;
 };
 

@@ -27,6 +27,13 @@ RTS.Map = function(options) {
 
   picker.addEventListener("mousedown", function(event) {
     clickCircleScript.showAt(event.point);
+    var selected = RTS.WorldObject.currentlySelected;
+
+    if (selected != null) {
+      if (selected.handleMapClicked) {
+        selected.handleMapClicked(event.point);
+      }
+    }
   });
 
   map.addComponent(new RTS.EdgeScrollingScript({ camera: Vizi.Services.graphics.camera }));
