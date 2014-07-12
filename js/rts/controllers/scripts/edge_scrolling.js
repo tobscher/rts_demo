@@ -30,6 +30,7 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var movement = new THREE.Vector3;
   var origin = this._camera.position;
 
+  // Do not check against window
   if (xpos >= 0 && xpos < this.scrollWidth) {
     movement.x -= this.scrollSpeed;
   } else if (xpos <= window.innerWidth && xpos > window.innerWidth - this.scrollWidth) {

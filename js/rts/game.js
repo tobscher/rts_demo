@@ -14,9 +14,9 @@ RTS.Game.prototype.initializeGame = function() {
 };
 
 RTS.Game.prototype.addController = function() {
-  var controller = new RTS.MainController(this.cam);
+  this.controller = new RTS.MainController(this.cam);
 
-  this.app.addObject(controller);
+  this.app.addObject(this.controller);
 };
 
 RTS.Game.prototype.addLight = function() {

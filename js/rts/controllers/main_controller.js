@@ -4,10 +4,10 @@ RTS.MainController = function(camera, options) {
 
   var controller = new Vizi.Object();
   var edgeScrollingScript = new RTS.EdgeScrollingScript({ camera: camera });
-	var orbitScript = new RTS.OrbitScript({ camera: camera });
+	var zoomScript = new RTS.ZoomScript({ camera: camera });
 
   controller.addComponent(edgeScrollingScript);
-  controller.addComponent(orbitScript);
+  controller.addComponent(zoomScript);
 
   return controller;
 };
