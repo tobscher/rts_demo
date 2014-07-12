@@ -21,7 +21,8 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var mouseInput = Vizi.Services.input.mouse.state;
 
   if (mouseInput.x == Vizi.Mouse.NO_POSITION ||
-      mouseInput.y == Vizi.Mouse.NO_POSITION) {
+      mouseInput.y == Vizi.Mouse.NO_POSITION ||
+      !mouseInput.insideContainer) {
     return;
   }
 
