@@ -54,4 +54,4 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   if (!destination.equals(origin)) {
     this._camera.position.copy(destination);
   }
-}
+};

@@ -4,8 +4,12 @@ RTS.Game = function() {
   this.app = new Vizi.Application({ container: container, displayStats: true });
   this.running = false;
 
+  RTS.Game.instance = this;
+
   this.initializeGame();
 };
+
+RTS.Game.instance = null;
 
 RTS.Game.prototype.initializeGame = function() {
   this.addLight();

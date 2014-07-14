@@ -23,6 +23,8 @@ RTS.Match.prototype.addStartpoint = function() {
 
   RTS.Buildings.CommandCentre.load(this.loader);
   RTS.Units.Tank.load(this.loader);
+  RTS.Units.SCV.load(this.loader);
+  RTS.Resources.Minerals.load(this.loader);
 };
 
 RTS.Match.prototype.initializeMap = function(map) {

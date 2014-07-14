@@ -39,7 +39,6 @@ RTS.Abilities.Move.prototype.turnToTarget = function(delta) {
   var rotation = new THREE.Quaternion();
   var alpha = Math.min(1, this.rotationStep);
 
-  debugger;
   var result = THREE.Quaternion.slerp(transform.quaternion, this.targetRotation, rotation, alpha);
 
   transform.quaternion.copy(rotation);

@@ -5,7 +5,7 @@ RTS.Abilities.Selectable = function(options) {
 
   var radius   = (options.radius !== undefined ? options.radius : 1),
       segments = 32,
-      material = new THREE.LineBasicMaterial( { color: 0x0000ff } ),
+      material = new THREE.LineDashedMaterial( { color: 0x00ff00, linewidth: 2 } ),
       geometry = new THREE.CircleGeometry( radius, segments );
 
   material.visible = false;
@@ -13,9 +13,9 @@ RTS.Abilities.Selectable = function(options) {
   // Remove center vertex
   geometry.vertices.shift();
 
-  var line = new THREE.Line(geometry, material);
+  var line = new THREE.Line(geometry, material, THREE.LinePieces);
   line.rotation.x = Math.PI / 2;
-  line.position.y = 0.2;
+  line.position.y = 0.11;
 
   var visual = new Vizi.Visual({ object: line });
   var script = new RTS.SelectableScript();

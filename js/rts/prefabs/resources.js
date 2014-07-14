@@ -1,0 +1,1 @@
+RTS.Resources = RTS.Resources || {};

@@ -1,12 +1,14 @@
 RTS.Map = function(options) {
   options = options || {};
 
+  this.size = 1000;
+
   var map = new Vizi.Object();
   var clickCircle = new RTS.ClickCircle();
   var clickCircleScript = clickCircle.getComponent(RTS.ClickCircleScript);
 
   // Visual
-  var geometry = new THREE.BoxGeometry(1000,1,1000);
+  var geometry = new THREE.BoxGeometry(this.size,1,this.size);
   var floorTexture = new THREE.ImageUtils.loadTexture('img/ground.png');
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
   floorTexture.repeat.set( 25, 25 );
@@ -16,6 +18,7 @@ RTS.Map = function(options) {
     geometry: geometry,
     material: material
   });
+
   map.addComponent(visual);
 
   // Script
