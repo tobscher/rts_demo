@@ -18,6 +18,7 @@ var paths = {
     './js/rts/prefabs/units/*.js',
     './js/rts/prefabs/resources/*.js',
     './js/rts/game.js',
+    './js/rts/hud.js',
     './js/rts/match.js'
   ],
   stylesheets: './scss/*.scss'

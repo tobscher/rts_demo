@@ -24,7 +24,7 @@ RTS.Game.prototype.addController = function() {
 };
 
 RTS.Game.prototype.addLight = function() {
-  var light = new Vizi.Object;
+  var light = new Vizi.Object();
   var directionalLight = new Vizi.DirectionalLight({
     intensity: 1,
     direction: new THREE.Vector3(0, -1, 0)
@@ -63,4 +63,4 @@ RTS.Game.prototype.run = function() {
 RTS.Game.prototype.startMatch = function(match) {
   match.start();
   this.currentMatch = match;
-}
+};

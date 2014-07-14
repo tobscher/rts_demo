@@ -2,6 +2,8 @@ RTS.Match = function(options) {
   options = options || {};
 
   this.running = false;
+  this.players = [];
+  this.hud = new RTS.HUD(this);
 
   this.initializeMap(options.map);
 };
@@ -10,7 +12,8 @@ RTS.Match.prototype.start = function() {
   this.running = true;
 };
 
-RTS.Match.prototype.loadWorldObject = function(worldObject) {
+RTS.Match.prototype.addPlayer = function(player) {
+  this.players.push(player);
 };
 
 RTS.Match.prototype.addStartpoint = function() {
@@ -32,4 +35,4 @@ RTS.Match.prototype.initializeMap = function(map) {
 
   Vizi.Application.instance.addObject(map);
   this.addStartpoint();
-}
+};
