@@ -39,8 +39,6 @@ RTS.Map = function(options) {
     }
   });
 
-  map.addComponent(new RTS.EdgeScrollingScript({ camera: Vizi.Services.graphics.camera }));
-
   map.addChild(clickCircle);
 
   return map;
