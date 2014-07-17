@@ -1,6 +1,6 @@
 RTS.Abilities.Move = function(options) {
   options = options || {};
-  Vizi.Script.call(this, options);
+  RTS.Abilities.Base.call(this, options);
 
   this.moving = false;
   this.rotating = false;
@@ -11,7 +11,7 @@ RTS.Abilities.Move = function(options) {
   this.clock = new THREE.Clock();
 };
 
-inherits(RTS.Abilities.Move, Vizi.Script);
+inherits(RTS.Abilities.Move, RTS.Abilities.Base);
 
 RTS.Abilities.Move.prototype.realize = function() {
 
@@ -79,8 +79,9 @@ RTS.Abilities.Move.prototype.mapClicked = function(position) {
 
   this.targetRotation = transform.quaternion.clone();
   this.targetRotation.setFromRotationMatrix(m1);
-  this.invertedTargetRotation = this.targetRotation.clone().inverse();
   this.rotationStep = 0;
   this.rotating = true;
   this.moving = this.isInMovablePosition();
+
+  this.publishEvent("move", this.targetPosition);
 };

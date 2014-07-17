@@ -1,5 +1,6 @@
 RTS.Abilities.Selectable = function(options) {
   options = options || {};
+
   var object = new Vizi.Object();
   object.name = "selectable";
 
@@ -26,16 +27,19 @@ RTS.Abilities.Selectable = function(options) {
   return object;
 };
 
-RTS.SelectableScript = function() {
-  Vizi.Script.call(this);
+RTS.SelectableScript = function(options) {
+  options = options || {};
+  RTS.Abilities.Base.call(this, options);
 };
 
-inherits(RTS.SelectableScript, Vizi.Script);
+inherits(RTS.SelectableScript, RTS.Abilities.Base);
 
 RTS.SelectableScript.prototype.update = function() {
 };
 
 RTS.SelectableScript.prototype.toggle = function(show) {
+  this.publishEvent("select", show);
+
   var object = this._object;
   var visual = object.getComponent(Vizi.Visual);
 

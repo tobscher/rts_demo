@@ -32,6 +32,9 @@ RTS.WorldObjectScript.prototype.select = function() {
 
   if (current != null) {
     var currentSelectable = current.findNode("selectable").getComponent(RTS.SelectableScript);
+
+    // Element is already selected
+    if (selectable == currentSelectable) return;
     currentSelectable.hide();
   };
 
