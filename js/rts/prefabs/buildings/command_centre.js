@@ -9,5 +9,5 @@ RTS.Buildings.CommandCentre = function(object, options) {
 };
 
 RTS.Buildings.CommandCentre.load = function(loader) {
-  loader.loadModel("js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: { radius: 1.7} });
+  loader.loadModel("/js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: { radius: 1.7} });
 };

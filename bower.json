@@ -4,7 +4,9 @@
   "authors": [
     "Tobias Haar <tobias.haar@gmail.com>"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "angular-resource": "~1.2.20"
+  },
   "description": "RTS Game",
   "license": "MIT",
   "ignore": [

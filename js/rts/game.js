@@ -1,7 +1,7 @@
 RTS.Game = function() {
   // Create Vizi application
-  var container = document.getElementById("container");
-  this.app = new Vizi.Application({ container: container, displayStats: true });
+  this.container = document.getElementById("container");
+  this.app = new Vizi.Application({ container: this.container, displayStats: true });
   this.running = false;
 
   RTS.Game.instance = this;
@@ -58,6 +58,19 @@ RTS.Game.prototype.run = function() {
   // Run the app
   this.app.run();
   this.running = true;
+};
+
+RTS.Game.prototype.fullscreen = function() {
+  var elem = this.container;
+  if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+  }
 };
 
 RTS.Game.prototype.startMatch = function(match) {

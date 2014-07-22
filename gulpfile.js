@@ -5,7 +5,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 var paths = {
-  scripts: [
+  engine: [
     './js/plugins/inherits.js',
     './js/ext/*.js',
     './js/rts.js',
@@ -24,6 +24,11 @@ var paths = {
     './js/rts/hud.js',
     './js/rts/match.js'
   ],
+  application: [
+    './js/matchmaking.js',
+    './js/services/*.js',
+    './js/controllers/*.js',
+  ],
   stylesheets: './scss/*.scss'
 };
 
@@ -34,22 +39,36 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('scripts', function() {
- gulp.src(paths.scripts)
+gulp.task('engine', function() {
+ gulp.src(paths.engine)
+    .pipe(concat('engine.js'))
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('engine.min', function() {
+ return gulp.src(paths.engine)
+    .pipe(uglify())
+    .pipe(concat('engine.min.js'))
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('application', function() {
+ gulp.src(paths.application)
     .pipe(concat('application.js'))
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('scripts.min', function() {
- return gulp.src(paths.scripts)
+gulp.task('application.min', function() {
+ return gulp.src(paths.application)
     .pipe(uglify())
     .pipe(concat('application.min.js'))
     .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(paths.engine, ['engine']);
+  gulp.watch(paths.application, ['application']);
   gulp.watch(paths.stylesheets, ['sass']);
 });
 
-gulp.task('default', ['scripts', 'sass', 'watch']);
+gulp.task('default', ['engine', 'application', 'sass', 'watch']);

@@ -9,7 +9,7 @@ RTS.Map = function(options) {
 
   // Visual
   var geometry = new THREE.BoxGeometry(this.size,1,this.size);
-  var floorTexture = new THREE.ImageUtils.loadTexture('img/ground.png');
+  var floorTexture = new THREE.ImageUtils.loadTexture('/img/ground.png');
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
   floorTexture.repeat.set( 25, 25 );
   var material = new THREE.MeshLambertMaterial( { map: floorTexture } );
