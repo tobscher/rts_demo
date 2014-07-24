@@ -16,10 +16,25 @@ RTS.Services.Network.prototype.initialize = function(options) {
   this.adapter.onOpen = function() {
     that.opened = true;
 
+    that.sendMessage({type:"connected", data: { id: guid(), name: "Unknown" }});
+
     setInterval(function() {
       that.transmit();
     }, that.frequency);
   };
+  this.adapter.onMessage = function(messages) {
+    for (var i = 0; i < messages.length; i++) {
+      var message = messages[i];
+      var handler = RTS.MessageHandlers.handlers[message.type];
+
+      if (handler) {
+        handler.handle(message);
+      } else {
+        console.warn("Could not find message handler for type:" + message.type);
+      }
+    }
+  };
+
   this.adapter.open();
 };
 

@@ -14,6 +14,8 @@ var paths = {
     './js/rts/services/*.js',
     './js/rts/abilities.js',
     './js/rts/abilities/*.js',
+    './js/rts/message_handlers.js',
+    './js/rts/message_handlers/*.js',
     './js/rts/controllers/scripts/*.js',
     './js/rts/controllers/*.js',
     './js/rts/prefabs/*.js',
@@ -21,7 +23,11 @@ var paths = {
     './js/rts/prefabs/units/*.js',
     './js/rts/prefabs/resources/*.js',
     './js/rts/game.js',
+    './js/rts/player.js',
+    './js/rts/human_player.js',
+    './js/rts/network_player.js',
     './js/rts/hud.js',
+    './js/rts/startpoint.js',
     './js/rts/match.js'
   ],
   application: [

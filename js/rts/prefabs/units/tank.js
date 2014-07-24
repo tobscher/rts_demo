@@ -1,11 +1,11 @@
-RTS.Units.Tank = function(object, options) {
+RTS.Units.Tank = function(object, player, options) {
   options = options || {};
   object.name = "Siege Tank"
 
   RTS.WorldObject.call(this, object, options);
 
   object.transform.scale.set(5, 5, 5);
-  object.transform.position.set(20, 0, 0);
+  object.transform.position.set(20, 0, 0).add(player.startpoint);
 
   var move = new RTS.Abilities.Move();
   object.addComponent(move);

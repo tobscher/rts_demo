@@ -1,13 +1,18 @@
 var gameServices = angular.module('gameServices', []);
 
 gameServices.service('Game', function() {
-  this.start = function() {
-    var game = new RTS.Game();
-    var map = new RTS.Map();
-    var match = new RTS.Match({map: map});
+  this.game = new RTS.Game();
 
-    game.run();
-    game.fullscreen();
-    game.startMatch(match);
+  this.create = function() {
+    this.map = new RTS.Map();
+    this.match = new RTS.Match({map: this.map});
+    this.player = new RTS.HumanPlayer({name: "Tobscher"});
+    this.match.addPlayer(this.player);
+  };
+
+  this.start = function() {
+    this.game.run();
+    this.game.fullscreen();
+    this.game.startMatch(this.match);
   };
 });

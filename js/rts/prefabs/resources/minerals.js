@@ -1,11 +1,11 @@
-RTS.Resources.Minerals = function(object, options) {
+RTS.Resources.Minerals = function(object, player, options) {
   options = options || {};
   object.name = "Minerals";
 
   RTS.WorldObject.call(this, object, options);
 
   object.transform.scale.set(5, 5, 5);
-  object.transform.position.set(-40, 0, 0);
+  object.transform.position.set(-40, 0, 0).add(player.startpoint);
   return object;
 };
 

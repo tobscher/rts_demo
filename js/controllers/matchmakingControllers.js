@@ -17,6 +17,7 @@ matchmakingControllers.controller('MatchCreateCtrl', ['$scope', 'Match', 'Game',
     var newMatch = new Match($scope.match);
     newMatch.$save(function(){
       $scope.step++;
+      Game.create();
     });
   };
 

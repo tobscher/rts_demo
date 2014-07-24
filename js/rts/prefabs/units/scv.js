@@ -1,11 +1,11 @@
-RTS.Units.SCV = function(object, options) {
+RTS.Units.SCV = function(object, player, options) {
   options = options || {};
   object.name = "SCV"
 
   RTS.WorldObject.call(this, object, options);
 
   object.transform.scale.set(5, 5, 5);
-  object.transform.position.set(0, 0, 20);
+  object.transform.position.set(0, 0, 20).add(player.startpoint);
 
   var move = new RTS.Abilities.Move();
   object.addComponent(move);

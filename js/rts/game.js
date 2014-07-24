@@ -14,13 +14,6 @@ RTS.Game.instance = null;
 RTS.Game.prototype.initializeGame = function() {
   this.addLight();
   this.addCamera();
-  this.addController();
-};
-
-RTS.Game.prototype.addController = function() {
-  this.controller = new RTS.MainController(this.cam);
-
-  this.app.addObject(this.controller);
 };
 
 RTS.Game.prototype.addLight = function() {
@@ -43,10 +36,6 @@ RTS.Game.prototype.addCamera = function() {
     near: 1,
     far: 10000
   });
-
-  // Override camera position from controller
-  this.cam.position.set(0, 100, 50);
-  this.cam.lookAt(Vizi.Services.graphics.scene.position);
 
   var camera = new Vizi.Object;
   camera.addComponent(this.cam);

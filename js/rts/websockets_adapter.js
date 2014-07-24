@@ -36,6 +36,8 @@ RTS.WebsocketsAdapter.prototype.attachEvents = function() {
   this.conn.onmessage = function(e) {
     var message = JSON.parse(e.data);
     console.log(message);
+
+    that.onMessage(message);
   };
 };
 
