@@ -3,11 +3,11 @@ RTS.ZoomScript = function(param)
   this.camera = param.camera;
   this.container = Vizi.Graphics.instance.container;
 
-  this.fov = 30;
+  this.fov = 40;
   this.zoomFactor = 1;
   this.zoomSpeed = 0.05;
   this.minZoomLevel = 0.5;
-  this.maxZoomLevel = 2;
+  this.maxZoomLevel = 1;
   this.updateZoom = false;
 
   Vizi.Script.call(this, param);

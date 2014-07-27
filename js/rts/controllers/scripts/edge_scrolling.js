@@ -6,7 +6,12 @@ RTS.EdgeScrollingScript = function(options) {
   this._camera = (options.camera !== undefined) ? options.camera : null;
   this.clock = new THREE.Clock();
   this.scrollWidth = 15;
-  this.scrollSpeed = 75;
+  this.scrollSpeed = 100;
+
+  this.lockedLeft = false;
+  this.lockedRight = false;
+  this.lockedTop = false;
+  this.lockedDown = false;
 };
 
 inherits(RTS.EdgeScrollingScript, Vizi.Script);
@@ -19,6 +24,7 @@ RTS.EdgeScrollingScript.prototype.update = function() {
 
 RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var mouseInput = Vizi.Services.input.mouse.state;
+  var boundaries = RTS.Services.Boundaries.instance;
 
   if (mouseInput.x == Vizi.Mouse.NO_POSITION ||
       mouseInput.y == Vizi.Mouse.NO_POSITION ||
@@ -28,21 +34,42 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
 
   var xpos = mouseInput.x;
   var ypos = mouseInput.y;
+
+  var left = (xpos >= 0 && xpos < this.scrollWidth);
+  var right = (xpos <= window.innerWidth && xpos > window.innerWidth - this.scrollWidth);
+  var top = (ypos >= 0 && ypos < this.scrollWidth);
+  var down = (ypos <= window.innerHeight && ypos > window.innerHeight - this.scrollWidth);
+
+  // Reset camera if outside of map
+  if (!boundaries.insideBounds) {
+    boundaries.resetBoundaries();
+
+    this.lockedLeft = left;
+    this.lockedRight = right;
+    this.lockedTop = top;
+    this.lockedDown = down;
+
+    return;
+  }
   var movement = new THREE.Vector3;
-  var origin = this._camera.position;
+  var origin = this._camera.position.clone();
 
   // Do not check against window
-  if (xpos >= 0 && xpos < this.scrollWidth) {
+  if (left && !this.lockedLeft) {
     movement.x -= this.scrollSpeed;
-  } else if (xpos <= window.innerWidth && xpos > window.innerWidth - this.scrollWidth) {
+    this.lockedRight = false;
+  } else if (right && !this.lockedRight) {
+    this.lockedLeft = false;
     movement.x += this.scrollSpeed;
   }
 
   // vertical camera movement
-  if (ypos >= 0 && ypos < this.scrollWidth) {
+  if (top && !this.lockedTop) {
     movement.z -= this.scrollSpeed;
-  } else if (ypos <= window.innerHeight && ypos > window.innerHeight - this.scrollWidth) {
+    this.lockedDown = false;
+  } else if (down && !this.lockedDown) {
     movement.z += this.scrollSpeed;
+    this.lockedTop = false;
   }
 
   // calculate desired camera position based on received input

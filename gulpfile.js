@@ -22,6 +22,7 @@ var paths = {
     './js/rts/prefabs/buildings/*.js',
     './js/rts/prefabs/units/*.js',
     './js/rts/prefabs/resources/*.js',
+    './js/rts/prefabs/minimap/*.js',
     './js/rts/game.js',
     './js/rts/player.js',
     './js/rts/human_player.js',

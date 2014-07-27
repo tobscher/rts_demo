@@ -1,14 +1,15 @@
 RTS.Buildings.CommandCentre = function(object, player, options) {
   options = options || {};
-  object.name = "Command Centre";
+  object.name = options.name;
 
-  RTS.WorldObject.call(this, object, options);
+  RTS.WorldObject.call(this, object, player, options);
 
   object.transform.scale.set(5, 5, 5);
-  object.transform.position.copy(player.startpoint)
   return object;
 };
 
-RTS.Buildings.CommandCentre.load = function(loader) {
-  loader.loadModel("/js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: { radius: 1.7} });
+RTS.Buildings.CommandCentre.load = function(loader, options) {
+  options["radius"] = 1.7;
+
+  loader.loadModel("/js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: options });
 };

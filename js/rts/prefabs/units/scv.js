@@ -1,11 +1,10 @@
 RTS.Units.SCV = function(object, player, options) {
   options = options || {};
-  object.name = "SCV"
+  object.name = options.name;
 
-  RTS.WorldObject.call(this, object, options);
+  RTS.WorldObject.call(this, object, player, options);
 
   object.transform.scale.set(5, 5, 5);
-  object.transform.position.set(0, 0, 20).add(player.startpoint);
 
   var move = new RTS.Abilities.Move();
   object.addComponent(move);
@@ -17,6 +16,8 @@ RTS.Units.SCV = function(object, player, options) {
   return object;
 };
 
-RTS.Units.SCV.load = function(loader) {
-  loader.loadModel("/js/models/SCV.js", { type: RTS.Units.SCV, options: { radius: 0.8 }});
+RTS.Units.SCV.load = function(loader, options) {
+  options["radius"] = 0.8;
+
+  loader.loadModel("/js/models/SCV.js", { type: RTS.Units.SCV, options: options });
 };

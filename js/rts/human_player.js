@@ -6,8 +6,8 @@ RTS.HumanPlayer = function(options) {
   var game = RTS.Game.instance;
   this.colour = 0xff0000;
 
-  game.cam.position.set(this.startpoint.x, 100, this.startpoint.z + 50);
-  game.cam.lookAt(this.startpoint);
+  game.cam.position.set(this.location.x, 100, this.location.z + 50);
+  game.cam.lookAt(this.location);
 
   this.controller = new RTS.MainController(game.cam);
   this.object.addChild(this.controller);

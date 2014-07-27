@@ -6,7 +6,7 @@ RTS.Services.Network = function(options) {
   RTS.Services.Network.instance = this;
 };
 
-goog.inherits(RTS.Services.Network, Vizi.Service);
+inherits(RTS.Services.Network, Vizi.Service);
 
 RTS.Services.Network.prototype.initialize = function(options) {
   options = options || {};
@@ -16,7 +16,7 @@ RTS.Services.Network.prototype.initialize = function(options) {
   this.adapter.onOpen = function() {
     that.opened = true;
 
-    that.sendMessage({type:"connected", data: { id: guid(), name: "Unknown" }});
+    that.sendMessage({type:"connected", data: { name: "Unknown" }});
 
     setInterval(function() {
       that.transmit();

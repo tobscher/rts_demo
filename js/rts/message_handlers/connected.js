@@ -9,7 +9,7 @@ RTS.MessageHandlers.Connected.prototype.handle = function(message) {
     me = new RTS.HumanPlayer({
       id: message.data.id,
       name: message.data.name,
-      startpoint: message.data.startpoint.location
+      startpoint: message.data.startpoint
     });
     game.currentMatch.addPlayer(me);
   }
@@ -25,7 +25,7 @@ RTS.MessageHandlers.Connected.prototype.handle = function(message) {
       var networkPlayer = new RTS.NetworkPlayer({
         id: player.id,
         name: player.name,
-        startpoint: message.data.startpoint.location
+        startpoint: player.startpoint
       });
       game.currentMatch.addPlayer(networkPlayer);
     }

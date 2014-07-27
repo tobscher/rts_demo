@@ -10,8 +10,15 @@ RTS.Startpoint.prototype.create = function() {
     that.player.object.addChild(model);
   });
 
-  RTS.Buildings.CommandCentre.load(this.loader);
-  RTS.Units.Tank.load(this.loader);
-  RTS.Units.SCV.load(this.loader);
-  RTS.Resources.Minerals.load(this.loader);
+  for (var i = 0; i < that.player.startpoint.buildings.length; i++) {
+    var b = that.player.startpoint.buildings[i];
+    var t = RTS.Buildings[b.type];
+    t.load(this.loader, b);
+  }
+
+  for (var i = 0; i < that.player.startpoint.units.length; i++) {
+    var u = that.player.startpoint.units[i];
+    var t = RTS.Units[u.type];
+    t.load(this.loader, u);
+  }
 };

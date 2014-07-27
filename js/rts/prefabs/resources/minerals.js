@@ -5,7 +5,7 @@ RTS.Resources.Minerals = function(object, player, options) {
   RTS.WorldObject.call(this, object, options);
 
   object.transform.scale.set(5, 5, 5);
-  object.transform.position.set(-40, 0, 0).add(player.startpoint);
+  object.transform.position.set(-40, 0, 0).add(player.location);
   return object;
 };
 

@@ -69,7 +69,7 @@ RTS.Abilities.Move.prototype.isInMovablePosition = function() {
   return Float.compare(transform.quaternion.eulerAngle().y, this.targetRotation.eulerAngle().y, this.startMovingThreshold);
 };
 
-RTS.Abilities.Move.prototype.mapClicked = function(position) {
+RTS.Abilities.Move.prototype.move = function(position) {
   var transform = this._object.transform;
 
   this.targetPosition = new THREE.Vector3(position.x, transform.position.y, position.z);
@@ -82,6 +82,9 @@ RTS.Abilities.Move.prototype.mapClicked = function(position) {
   this.rotationStep = 0;
   this.rotating = true;
   this.moving = this.isInMovablePosition();
+};
 
+RTS.Abilities.Move.prototype.mapClicked = function(position) {
+  this.move(position);
   this.publishEvent("move", this.targetPosition);
 };

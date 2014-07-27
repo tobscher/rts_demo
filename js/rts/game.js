@@ -14,6 +14,7 @@ RTS.Game.instance = null;
 RTS.Game.prototype.initializeGame = function() {
   this.addLight();
   this.addCamera();
+  this.addMinimap();
 };
 
 RTS.Game.prototype.addLight = function() {
@@ -32,7 +33,7 @@ RTS.Game.prototype.addLight = function() {
 RTS.Game.prototype.addCamera = function() {
   this.cam = new Vizi.PerspectiveCamera({
     active: true,
-    fov: 30,
+    fov: 40,
     near: 1,
     far: 10000
   });
@@ -41,6 +42,11 @@ RTS.Game.prototype.addCamera = function() {
   camera.addComponent(this.cam);
 
   this.app.addObject(camera);
+};
+
+RTS.Game.prototype.addMinimap = function() {
+  this.minimap = new RTS.Minimap.Viewport();
+  this.app.addObject(this.minimap);
 };
 
 RTS.Game.prototype.run = function() {

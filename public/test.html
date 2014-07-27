@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>RTS</title>
+    <meta name="description" content="RTS">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <style type="text/css">
+      html, body { height:100%; width:100%; margin:0; padding:0; background:#000; color:#FFF }
+    </style>
+    <link rel="stylesheet" href="application.css">
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/vizi.js"></script>
+    <script>
+   var renderer = null
+    scene = null,
+    camera = null,
+    mapCamera = null,
+    project = null,
+    cube = null,
+    tl = null,
+    tr = null,
+    bl = null,
+    br = null,
+    mapWidth = 100,
+    mapHeight = 100;
+
+var clock = new THREE.Clock();
+
+function animate() {
+  var delta = clock.getDelta();
+
+  tl.position.copy(GetWorldPosition(0, 0));
+  tr.position.copy(GetWorldPosition(window.innerWidth, 0));
+
+  bl.position.copy(GetWorldPosition(0, window.innerHeight));
+  br.position.copy(GetWorldPosition(window.innerWidth, window.innerHeight));
+}
+
+function run() {
+  requestAnimationFrame(function() { run(); });
+
+  var w = window.innerWidth, h = window.innerHeight;
+
+  renderer.setViewport( 0, 0, w, h );
+  renderer.clear();
+  renderer.render(scene, camera);
+
+  renderer.setViewport(10, 10, mapWidth, mapHeight );
+  renderer.render(scene, mapCamera);
+
+  animate();
+}
+
+$(document).ready(function() {
+  // Scene
+  scene = new THREE.Scene();
+
+  // Fog
+  scene.fog = new THREE.Fog(0x87CEEB, 1, 2500);
+
+  // Projector
+  projector = new THREE.Projector();
+
+  // Main Camera
+  camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
+  camera.position.set(0, 100, 50);
+  camera.lookAt(scene.position);
+  scene.add(camera);
+
+  // Map Camera
+  // This should match terrain width/height
+  var width = 500;
+  var height = 500;
+
+  mapCamera = new THREE.OrthographicCamera(
+    width / -2,   // Left
+    width / 2,    // Right
+    height / 2,   // Top
+    height / -2,  // Bottom
+    -5000,                  // Near
+    10000 );                // Far
+  mapCamera.up = new THREE.Vector3(0,0,-1);
+  mapCamera.lookAt( new THREE.Vector3(0,-1,0) );
+
+  // Axis
+  var axes = new THREE.AxisHelper(100);
+  scene.add(axes);
+
+  // Renderer
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 1);
+  renderer.autoClear = false;
+  document.body.appendChild( renderer.domElement );
+
+  var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+  directionalLight.position.set( 0, 1, 0 );
+  scene.add( directionalLight );
+
+  var geometry = new THREE.BoxGeometry(500, 1, 500);
+  var eGeometry = new THREE.BoxGeometry(20, 20, 20);
+  var bGeometry = new THREE.BoxGeometry(10, 1, 10);
+  var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+  var eMaterial = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+  var bMaterial = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
+  cube = new THREE.Mesh( geometry, material );
+  var eCube = new THREE.Mesh( eGeometry, eMaterial );
+
+  tl = new THREE.Mesh(bGeometry, bMaterial);
+  tr = new THREE.Mesh(bGeometry, bMaterial);
+  bl = new THREE.Mesh(bGeometry, bMaterial);
+  br = new THREE.Mesh(bGeometry, bMaterial);
+
+  scene.add( cube );
+  scene.add(eCube);
+  scene.add(tl);
+  scene.add(tr);
+  scene.add(bl);
+  scene.add(br);
+
+  run();
+});
+
+function GetWorldPosition(x,y) {
+  var vector = new THREE.Vector3(
+  ( x / window.innerWidth ) * 2 - 1,
+  - ( y / window.innerHeight ) * 2 + 1,
+  0.5
+  );
+  projector.unprojectVector( vector, camera );
+
+  var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+  var intersects = ray.intersectObjects([cube]);
+
+  if ( intersects.length > 0 ) {
+    return intersects[ 0 ].point;
+  }
+}
+    </script>
+  </body>
+</html>
