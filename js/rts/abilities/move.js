@@ -54,9 +54,12 @@ RTS.Abilities.Move.prototype.turnToTarget = function(delta) {
 };
 
 RTS.Abilities.Move.prototype.makeMove = function(delta) {
-  var transform = this._object.transform;
+  var object = this._object;
+  var transform = object.transform;
+  var newPosition = THREE.Vector3.MoveTowards(transform.position, this.targetPosition, delta * this.movementSpeed);
 
-  transform.position.copy(THREE.Vector3.MoveTowards(transform.position, this.targetPosition, delta * this.movementSpeed));
+  transform.position.copy(newPosition);
+  object.mini.transform.position.copy(newPosition);
 
   if (this.targetPosition.equals(transform.position)) {
     this.moving = false;

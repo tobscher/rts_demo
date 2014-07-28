@@ -3,6 +3,7 @@ RTS.Map = function(options) {
 
   this.size = 1000;
 
+  var graphics = Vizi.Graphics.instance;
   var map = new Vizi.Object();
   var clickCircle = new RTS.ClickCircle();
   var clickCircleScript = clickCircle.getComponent(RTS.ClickCircleScript);

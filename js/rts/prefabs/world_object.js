@@ -2,6 +2,14 @@ RTS.WorldObject = function(object, player, options) {
   options = options || {};
   options["colour"] = player.colour;
 
+  if (options.width === undefined) {
+    options.width = 20;
+  }
+
+  if (options.depth === undefined) {
+    options.depth = 20;
+  }
+
   var that = this;
   var selectable = new RTS.Abilities.Selectable(options);
   var script = new RTS.WorldObjectScript(options);
@@ -16,6 +24,27 @@ RTS.WorldObject = function(object, player, options) {
   });
 
   object.id = options.id;
+
+  var graphics = Vizi.Graphics.instance;
+  var game = RTS.Game.instance;
+
+  var miniColor = player.colour;
+
+  var me = RTS.HumanPlayer.instance;
+  if (player.id == me.id) {
+    miniColor = 0x00ff00;
+  }
+
+  object.mini = new Vizi.Object({layer: graphics.mapLayer});
+  var geometry = new THREE.BoxGeometry(options.width, 5, options.depth);
+  var material = new THREE.MeshBasicMaterial({ color: miniColor});
+  var visual = new Vizi.Visual({
+    geometry: geometry,
+    material: material
+  });
+
+  object.mini.addComponent(visual);
+  game.app.addObject(object.mini);
 };
 
 RTS.WorldObject.currentlySelected = null;
@@ -35,6 +64,8 @@ RTS.WorldObjectScript.prototype.realize = function() {
   var visual = object.getComponent(Vizi.Visual);
 
   object.transform.position.copy(this.location);
+  debugger;
+  object.mini.transform.position.copy(this.location);
 
   visual.material.materials[0].color = this.colour;
 };

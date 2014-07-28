@@ -10,6 +10,8 @@ RTS.Buildings.CommandCentre = function(object, player, options) {
 
 RTS.Buildings.CommandCentre.load = function(loader, options) {
   options["radius"] = 1.7;
+  options["width"] = 20;
+  options["depth"] = 20;
 
   loader.loadModel("/js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: options });
 };

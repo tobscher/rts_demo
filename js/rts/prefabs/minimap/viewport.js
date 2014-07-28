@@ -1,7 +1,8 @@
 RTS.Minimap.Viewport = function(options) {
   options = options || {};
 
-  var viewport = new Vizi.Object();
+  var graphics = Vizi.Graphics.instance;
+  var viewport = new Vizi.Object({layer: graphics.mapLayer});
 
   // Visual
   var material = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 1 } );
@@ -13,7 +14,7 @@ RTS.Minimap.Viewport = function(options) {
   }
 
   var l = new THREE.Line(geometry, material, THREE.LinePieces);
-  var line = new Vizi.Visual({ object: l });
+  var line = new Vizi.Visual({ object: l});
   viewport.addComponent(line);
 
   // Script

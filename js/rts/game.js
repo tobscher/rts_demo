@@ -18,16 +18,27 @@ RTS.Game.prototype.initializeGame = function() {
 };
 
 RTS.Game.prototype.addLight = function() {
+  var graphics = Vizi.Graphics.instance;
+
   var light = new Vizi.Object();
-  var directionalLight = new Vizi.DirectionalLight({
-    intensity: 1,
-    direction: new THREE.Vector3(0, -1, 0)
-  });
-  directionalLight.position.set(0,1,0);
-  light.addComponent(directionalLight);
+  var lightMini = new Vizi.Object({ layer: graphics.mapLayer });
+
+  function newLightComponent() {
+    var directionalLight = new Vizi.DirectionalLight({
+      intensity: 1,
+      direction: new THREE.Vector3(0, -1, 0)
+    });
+    directionalLight.position.set(0,1,0);
+
+    return directionalLight
+  }
+
+  light.addComponent(newLightComponent());
+  lightMini.addComponent(newLightComponent());
 
   // Add light to the scene
   this.app.addObject(light);
+  this.app.addObject(lightMini);
 };
 
 RTS.Game.prototype.addCamera = function() {
@@ -46,6 +57,7 @@ RTS.Game.prototype.addCamera = function() {
 
 RTS.Game.prototype.addMinimap = function() {
   this.minimap = new RTS.Minimap.Viewport();
+
   this.app.addObject(this.minimap);
 };
 

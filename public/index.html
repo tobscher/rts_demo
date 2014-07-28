@@ -24,7 +24,8 @@
     <script>
       var game = new RTS.Game();
       var map = new RTS.Map();
-      var match = new RTS.Match({map: map});
+      var mini = new RTS.MapMini();
+      var match = new RTS.Match({map: map, mini: mini});
 
       game.run();
       game.startMatch(match);

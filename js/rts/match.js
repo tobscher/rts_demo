@@ -5,7 +5,7 @@ RTS.Match = function(options) {
   this.players = [];
   this.hud = new RTS.HUD(this);
 
-  this.addMap(options.map);
+  this.addMap(options.map, options.mini);
 };
 
 RTS.Match.prototype.start = function() {
@@ -23,8 +23,10 @@ RTS.Match.prototype.addStartpointFor = function(player) {
   startpoint.create();
 };
 
-RTS.Match.prototype.addMap = function(map) {
+RTS.Match.prototype.addMap = function(map, mini) {
   this.map = map;
+  this.mini = mini;
 
   Vizi.Application.instance.addObject(map);
+  Vizi.Application.instance.addObject(mini);
 };
