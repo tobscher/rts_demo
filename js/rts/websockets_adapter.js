@@ -1,6 +1,6 @@
 RTS.WebsocketsAdapter = function(options) {
   options = options || {};
-  this.server = options.server || "www.rts.local";
+  this.server = options.server || "rts.dev";
 
   if (window["WebSocket"]) {
     this.socket = window["WebSocket"];

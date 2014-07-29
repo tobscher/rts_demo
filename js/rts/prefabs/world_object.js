@@ -25,7 +25,6 @@ RTS.WorldObject = function(object, player, options) {
 
   object.id = options.id;
 
-  var graphics = Vizi.Graphics.instance;
   var game = RTS.Game.instance;
 
   var miniColor = player.colour;
@@ -35,7 +34,7 @@ RTS.WorldObject = function(object, player, options) {
     miniColor = 0x00ff00;
   }
 
-  object.mini = new Vizi.Object({layer: graphics.mapLayer});
+  object.mini = new Vizi.Object({layer: game.mapLayer});
   var geometry = new THREE.BoxGeometry(options.width, 5, options.depth);
   var material = new THREE.MeshBasicMaterial({ color: miniColor});
   var visual = new Vizi.Visual({
@@ -64,7 +63,6 @@ RTS.WorldObjectScript.prototype.realize = function() {
   var visual = object.getComponent(Vizi.Visual);
 
   object.transform.position.copy(this.location);
-  debugger;
   object.mini.transform.position.copy(this.location);
 
   visual.material.materials[0].color = this.colour;

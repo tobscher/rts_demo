@@ -3,8 +3,8 @@ RTS.MapMini = function(options) {
 
   this.size = 1000;
 
-  var graphics = Vizi.Graphics.instance;
-  var map = new Vizi.Object({layer: graphics.mapLayer});
+  var game = RTS.Game.instance;
+  var map = new Vizi.Object({layer: game.mapLayer});
 
   // Visual
   var geometry = new THREE.BoxGeometry(this.size,1,this.size);
