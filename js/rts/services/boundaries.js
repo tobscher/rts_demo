@@ -7,6 +7,8 @@ RTS.Services.Boundaries = function() {
   this.bottomRight = new THREE.Vector3(0,0,0);
 
   this.projector = new THREE.Projector();
+  this.insideBounds = true;
+  this.boundariesNeedUpdating = false;
 
   RTS.Services.Boundaries.instance = this;
 };
@@ -17,8 +19,12 @@ RTS.Services.Boundaries.initialize = function(options) {
 };
 
 RTS.Services.Boundaries.prototype.update = function() {
-  this.updateBoundaries();
-  this.checkBoundaries();
+  if (this.boundariesNeedUpdating) {
+    this.updateBoundaries();
+    this.checkBoundaries();
+
+    this.boundariesNeedUpdating = false;
+  }
 };
 
 RTS.Services.Boundaries.prototype.resetBoundaries = function() {
@@ -29,6 +35,8 @@ RTS.Services.Boundaries.prototype.resetBoundaries = function() {
 
   var camera = Vizi.Graphics.instance.camera;
   camera.position.copy(this.validCameraPosition);
+
+  this.boundariesNeedUpdating = true;
 };
 
 RTS.Services.Boundaries.prototype.updateBoundaries = function() {

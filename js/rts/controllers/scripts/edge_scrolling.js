@@ -51,6 +51,7 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
 
     return;
   }
+
   var movement = new THREE.Vector3;
   var origin = this._camera.position.clone();
 
@@ -80,5 +81,6 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   // if a change in position is detected perform the necessary update
   if (!destination.equals(origin)) {
     this._camera.position.copy(destination);
+    boundaries.boundariesNeedUpdating = true;
   }
 };

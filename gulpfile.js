@@ -29,7 +29,8 @@ var paths = {
     './js/rts/network_player.js',
     './js/rts/hud.js',
     './js/rts/startpoint.js',
-    './js/rts/match.js'
+    './js/rts/match.js',
+    './js/rts/window.js'
   ],
   application: [
     './js/matchmaking.js',

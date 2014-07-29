@@ -66,6 +66,9 @@ RTS.ZoomScript.prototype.zoom = function(direction) {
   }
 
   this.updateZoom = true;
+
+  var boundaries = RTS.Services.Boundaries.instance;
+  boundaries.boundariesNeedUpdating = true;
 };
 
 RTS.ZoomScript.prototype.zoomIn = function() {
