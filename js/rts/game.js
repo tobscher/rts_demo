@@ -56,8 +56,8 @@ RTS.Game.prototype.addCamera = function() {
 RTS.Game.prototype.addMinimap = function() {
   var graphics = Vizi.Graphics.instance;
 
-  var width = 1000;
-  var height = 1000;
+  var width = 1024;
+  var height = 1024;
   var mapCamera = new THREE.OrthographicCamera(
       width / -2,   // Left
       width / 2,    // Right
@@ -68,12 +68,13 @@ RTS.Game.prototype.addMinimap = function() {
   this.mapLayer = graphics.addLayer("minimap", mapCamera, {
     up: new THREE.Vector3(0,0,-1),
     lookAt: new THREE.Vector3(0,-1,0),
-    viewport: { x: 10, y: 10, width: 200, height: 200}
+    viewport: { x: 10, y: 10, width: 192, height: 192}
   });
 
   graphics.scene.add(mapCamera);
 
   this.minimap = new RTS.Minimap.Viewport();
+  this.minimapAspect = width/192;
   this.app.addObject(this.minimap);
 };
 

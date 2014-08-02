@@ -1,6 +1,7 @@
 RTS.WorldObject = function(object, player, options) {
   options = options || {};
   options["colour"] = player.colour;
+  options["owner"] = player.id;
 
   if (options.width === undefined) {
     options.width = 20;
@@ -28,14 +29,16 @@ RTS.WorldObject = function(object, player, options) {
   var game = RTS.Game.instance;
 
   var miniColor = player.colour;
+  var height = 1;
 
   var me = RTS.HumanPlayer.instance;
   if (player.id == me.id) {
     miniColor = 0x00ff00;
+    height = 3;
   }
 
   object.mini = new Vizi.Object({layer: game.mapLayer});
-  var geometry = new THREE.BoxGeometry(options.width, 5, options.depth);
+  var geometry = new THREE.BoxGeometry(options.width, height, options.depth);
   var material = new THREE.MeshBasicMaterial({ color: miniColor});
   var visual = new Vizi.Visual({
     geometry: geometry,
@@ -54,6 +57,7 @@ RTS.WorldObjectScript = function(options) {
 
   this.location = new THREE.Vector3(options.location.x, options.location.y, options.location.z);
   this.colour = new THREE.Color(options.colour);
+  this.owner = options.owner;
 };
 
 inherits(RTS.WorldObjectScript, Vizi.Script);
@@ -61,9 +65,15 @@ inherits(RTS.WorldObjectScript, Vizi.Script);
 RTS.WorldObjectScript.prototype.realize = function() {
   var object = this._object;
   var visual = object.getComponent(Vizi.Visual);
+  var me = RTS.HumanPlayer.instance;
 
   object.transform.position.copy(this.location);
   object.mini.transform.position.copy(this.location);
+
+  if (this.owner == me.id) {
+    RTS.HumanPlayer.instance.worldObjects.push(object.mini.transform.position);
+    RTS.FogOfWarMini.drawCircle(object.mini.transform.position);
+  }
 
   visual.material.materials[0].color = this.colour;
 };

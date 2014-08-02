@@ -32,6 +32,10 @@ RTS.Minimap.ViewportScript = function(options) {
 
 inherits(RTS.Minimap.ViewportScript, Vizi.Script);
 
+RTS.Minimap.ViewportScript.prototype.realize = function() {
+  this._object.transform.position.y = 5;
+};
+
 RTS.Minimap.ViewportScript.prototype.update = function() {
   this.updateViewport();
 };

@@ -7,6 +7,8 @@ RTS.Abilities.Move = function(options) {
   this.movementSpeed = 15.0;
   this.rotatingSpeed = 50.0;
   this.startMovingThreshold = 0.3;
+  this.minimapUpdateRate = 30;
+  this.minimapUpdates = 0;
 
   this.clock = new THREE.Clock();
 };
@@ -54,12 +56,19 @@ RTS.Abilities.Move.prototype.turnToTarget = function(delta) {
 };
 
 RTS.Abilities.Move.prototype.makeMove = function(delta) {
+
   var object = this._object;
   var transform = object.transform;
   var newPosition = THREE.Vector3.MoveTowards(transform.position, this.targetPosition, delta * this.movementSpeed);
 
   transform.position.copy(newPosition);
   object.mini.transform.position.copy(newPosition);
+  this.minimapUpdates++;
+
+  if (this.minimapUpdates == this.minimapUpdateRate) {
+    RTS.FogOfWarMini.drawCircle(newPosition);
+    this.minimapUpdates = 0;
+  }
 
   if (this.targetPosition.equals(transform.position)) {
     this.moving = false;

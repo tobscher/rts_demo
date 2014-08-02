@@ -5,6 +5,7 @@ RTS.HumanPlayer = function(options) {
 
   var game = RTS.Game.instance;
   this.colour = 0xff0000;
+  this.worldObjects = [];
 
   game.cam.position.set(this.location.x, 100, this.location.z + 50);
   game.cam.lookAt(this.location);

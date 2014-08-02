@@ -1,7 +1,7 @@
 RTS.Map = function(options) {
   options = options || {};
 
-  this.size = 1000;
+  this.size = 1024;
 
   var graphics = Vizi.Graphics.instance;
   var map = new Vizi.Object();
@@ -10,7 +10,7 @@ RTS.Map = function(options) {
 
   // Visual
   var geometry = new THREE.BoxGeometry(this.size,1,this.size);
-  var floorTexture = new THREE.ImageUtils.loadTexture('/img/ground2.jpg');
+  var floorTexture = new THREE.ImageUtils.loadTexture('/img/ground.png');
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
   floorTexture.repeat.set( 25, 25 );
   var material = new THREE.MeshLambertMaterial( { map: floorTexture } );
