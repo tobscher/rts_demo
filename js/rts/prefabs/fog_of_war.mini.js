@@ -6,7 +6,6 @@ RTS.FogOfWarMini = function(options) {
   var game = RTS.Game.instance;
   var fogOfWar = new Vizi.Object({layer: game.mapLayer});
 
-  var t = new THREE.ImageUtils.loadTexture('/img/ground.png');
   var geometry = new THREE.PlaneGeometry(this.size,this.size);
   var material = new THREE.MeshBasicMaterial({
     color: 0x000000,
@@ -30,6 +29,10 @@ RTS.FogOfWarMini = function(options) {
 };
 
 RTS.FogOfWarMini.getTexture = function() {
+  if (this.texture) {
+    return this.texture;
+  }
+
   this.canvasExplored = document.createElement('canvas');
   this.canvas = document.createElement('canvas');
   this.ctx = this.canvas.getContext('2d');

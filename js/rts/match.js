@@ -27,9 +27,11 @@ RTS.Match.prototype.addMap = function(map, mini) {
   this.map = map;
   this.mini = mini;
 
+  this.fog = new RTS.FogOfWar();
   this.fogMini = new RTS.FogOfWarMini();
 
   Vizi.Application.instance.addObject(map);
   Vizi.Application.instance.addObject(mini);
+  Vizi.Application.instance.addObject(this.fog);
   Vizi.Application.instance.addObject(this.fogMini);
 };

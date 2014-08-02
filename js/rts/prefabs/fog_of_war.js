@@ -7,17 +7,16 @@ RTS.FogOfWar = function(options) {
   var fogOfWar = new Vizi.Object();
 
   var geometry = new THREE.PlaneGeometry(this.size,this.size);
-  var material = new THREE.ShaderMaterial({
-    uniforms: RTS.HumanPlayer.uniforms,
-    vertexShader: document.getElementById( 'vertexShader' ).textContent,
-    fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
-    transparent: true,
-    side: THREE.DoubleSide
+  var material = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    alphaMap: RTS.FogOfWarMini.getTexture(),
+    transparent: true
   });
 
   var mesh = new THREE.Mesh(geometry, material);
-  mesh.position.y = 20;
-  mesh.rotation.x = Math.PI/2;
+  mesh.ignorePick = true;
+  mesh.position.y = 1;
+  mesh.rotation.x = -Math.PI/2;
 
   var visual = new Vizi.Visual({
     object: mesh,
