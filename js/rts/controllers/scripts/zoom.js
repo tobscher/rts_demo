@@ -23,10 +23,10 @@ RTS.ZoomScript.prototype.realize = function() {
 
     var delta = 0;
 
-    if ( event.wheelDelta ) { // WebKit / Opera / Explorer 9
-      delta = event.wheelDelta;
-    } else if ( event.detail ) { // Firefox
-      delta = - event.detail;
+    if ( e.wheelDelta ) { // WebKit / Opera / Explorer 9
+      delta = e.wheelDelta;
+    } else if ( e.detail ) { // Firefox
+      delta = - e.detail;
     }
 
     if (delta > 0) {
