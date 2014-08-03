@@ -17,6 +17,7 @@
     <div id="hud">
       <span id="minerals"></span>
     </div>
+
     <div id="container"></div>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/vizi.js"></script>
@@ -27,8 +28,76 @@
       var mini = new RTS.MapMini();
       var match = new RTS.Match({map: map, mini: mini});
 
+      // Do this manually to not rely on network service
+      var me = new RTS.HumanPlayer({
+        id: "1337",
+        name: "Tobscher",
+        startpoint: {
+          location: {
+            x: 0,
+            y: 0,
+            z: 0
+          },
+          buildings: [
+            {
+              id: "1",
+              name: "Command Centre",
+              type: "CommandCentre",
+              location: {
+                x: 0,
+                y: 0,
+                z: 0
+              }
+            }
+          ],
+          units: [
+            {
+              id: "2",
+              name: "SCV",
+              type: "SCV",
+              location: {
+                x: -15,
+                y: 0,
+                z: 20
+              }
+            },
+            {
+              id: "3",
+              name: "SCV",
+              type: "SCV",
+              location: {
+                x: -5,
+                y: 0,
+                z: 20
+              }
+            },
+            {
+              id: "4",
+              name: "SCV",
+              type: "SCV",
+              location: {
+                x: 5,
+                y: 0,
+                z: 20
+              }
+            },
+            {
+              id: "5",
+              name: "SCV",
+              type: "SCV",
+              location: {
+                x: 15,
+                y: 0,
+                z: 20
+              }
+            }
+          ]
+        }
+      });
+
       game.run();
       game.startMatch(match);
+      game.currentMatch.addPlayer(me);
     </script>
   </body>
 </html>

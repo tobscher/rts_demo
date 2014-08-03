@@ -61,13 +61,13 @@ RTS.Services.Boundaries.prototype.updateTopRight = function() {
 RTS.Services.Boundaries.prototype.updateBottomLeft = function() {
   if (!this.bottomLeft) return;
 
-  this.bottomLeft.copy(this.getPoint(0, window.innerHeight));
+  this.bottomLeft.copy(this.getPoint(0, window.innerHeight - 220));
 };
 
 RTS.Services.Boundaries.prototype.updateBottomRight = function() {
   if (!this.bottomRight) return;
 
-  this.bottomRight.copy(this.getPoint(window.innerWidth, window.innerHeight));
+  this.bottomRight.copy(this.getPoint(window.innerWidth, window.innerHeight - 220));
 };
 
 RTS.Services.Boundaries.prototype.updateLeft = function() {

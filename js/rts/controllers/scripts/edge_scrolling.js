@@ -35,10 +35,13 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var xpos = mouseInput.x;
   var ypos = mouseInput.y;
 
+  var innerWidth = window.innerWidth;
+  var innerHeight = window.innerHeight;
+
   var left = (xpos >= 0 && xpos < this.scrollWidth);
-  var right = (xpos <= window.innerWidth && xpos > window.innerWidth - this.scrollWidth);
+  var right = (xpos <= innerWidth && xpos > innerWidth - this.scrollWidth);
   var top = (ypos >= 0 && ypos < this.scrollWidth);
-  var down = (ypos <= window.innerHeight && ypos > window.innerHeight - this.scrollWidth);
+  var down = (ypos <= innerHeight && ypos > innerHeight - this.scrollWidth);
 
   // Reset camera if outside of map
   if (!boundaries.insideBounds) {

@@ -29,7 +29,7 @@ RTS.WebsocketsAdapter.prototype.attachEvents = function() {
     console.log("Websockets connection closed.");
   };
 
-  this.conn.onerror = function(e) {
+  this.conn.onerror = function(e, d) {
     console.log("A network error occured.", e);
   };
 

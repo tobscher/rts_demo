@@ -20,9 +20,11 @@ RTS.Abilities.Selectable = function(options) {
 
   var visual = new Vizi.Visual({ object: line });
   var script = new RTS.SelectableScript();
+  var rotator = new Vizi.RotateBehavior({ velocity: 0.2 });
 
   object.addComponent(visual);
   object.addComponent(script);
+  object.addComponent(rotator);
 
   return object;
 };
@@ -30,6 +32,8 @@ RTS.Abilities.Selectable = function(options) {
 RTS.SelectableScript = function(options) {
   options = options || {};
   RTS.Abilities.Base.call(this, options);
+
+  this.visible = false;
 };
 
 inherits(RTS.SelectableScript, RTS.Abilities.Base);
@@ -42,8 +46,17 @@ RTS.SelectableScript.prototype.toggle = function(show) {
 
   var object = this._object;
   var visual = object.getComponent(Vizi.Visual);
+  var rotation = object.getComponent(Vizi.RotateBehavior);
 
   visual.material.visible = show;
+
+  if (show) {
+    rotation.start();
+  } else {
+    rotation.stop();
+  }
+
+  this.visible = show;
 };
 
 RTS.SelectableScript.prototype.show = function() {

@@ -43,7 +43,7 @@ RTS.FogOfWarMini.getTexture = function() {
   this.ctxExplored.canvas.width = 1024;
   this.ctxExplored.canvas.height = 1024;
 
-  this.ctx.fillStyle = "rgb(255,255,255)";
+  this.ctx.fillStyle = "rgb(200,200,200)";
   this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
 
   this.texture = new THREE.Texture(this.ctx.canvas);
@@ -66,7 +66,7 @@ RTS.FogOfWarMini.drawCircle = function(vector) {
   this.ctxExplored.fill();
 
   // this.ctx.globalCompositeOperation = "xor";
-  this.ctx.fillStyle = "rgb(255,255,255)";
+  this.ctx.fillStyle = "rgb(200,200,200)";
   this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
 
   this.ctx.drawImage(this.ctxExplored.canvas,0,0);

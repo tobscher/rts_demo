@@ -27,7 +27,7 @@ RTS.ClickCircleScript = function(options) {
   options = options || {};
 
   this.animating = false;
-  this.animationStep = 0;
+  this.clock = new THREE.Clock();
 
   Vizi.Script.call(this, options);
 };
@@ -43,15 +43,15 @@ RTS.ClickCircleScript.prototype.realize = function() {
 };
 
 RTS.ClickCircleScript.prototype.update = function() {
+  var delta = this.clock.getDelta();
   if (!this.animating) return;
 
   var visual = this._object.getComponent(Vizi.Visual);
-  this.animationStep += 0.04;
-  visual.scale.sub(new THREE.Vector3(0.01, 0.01, 0.01));
+  var v = new THREE.Vector3(0.6 * delta, 0.6 * delta, 0.6 * delta);
+  visual.scale.sub(v);
 
-  if (this.animationStep >= 1) {
+  if (visual.scale.x < 0.1) {
     this.animating = false;
-    this.animationStep = 0;
     visual.material.visible = false;
   }
 };
@@ -61,7 +61,6 @@ RTS.ClickCircleScript.prototype.showAt = function(position) {
   visual.position.set(position.x, visual.position.y, position.z);
   visual.material.visible = true;
 
-  this.animationStep = 0;
   visual.scale.set(0.3, 0.3, 0.3);
   this.animating = true;
 }
