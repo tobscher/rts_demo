@@ -6,6 +6,7 @@ RTS.EdgeScrollingScript = function(options) {
   this._camera = (options.camera !== undefined) ? options.camera : null;
   this.clock = new THREE.Clock();
   this.scrollSpeed = 100;
+  this.scrollTolerance = 1;
 
   this.lockedLeft = false;
   this.lockedRight = false;
@@ -34,13 +35,13 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var xpos = mouseInput.x;
   var ypos = mouseInput.y;
 
-  var innerWidth = window.innerWidth - 1;
-  var innerHeight = window.innerHeight - 1;
+  var innerWidth = window.innerWidth - 1 - this.scrollTolerance;
+  var innerHeight = window.innerHeight - 1 - this.scrollTolerance;
 
-  var left = xpos == 0;
-  var right = xpos == innerWidth;
-  var top = ypos == 0;
-  var down = ypos == innerHeight;
+  var left = xpos <= this.scrollTolerance;
+  var right = xpos >= innerWidth;
+  var top = ypos <= this.scrollTolerance;
+  var down = ypos >= innerHeight;
 
   // Reset camera if outside of map
   if (!boundaries.insideBounds) {
