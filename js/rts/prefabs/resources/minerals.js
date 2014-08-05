@@ -10,5 +10,5 @@ RTS.Resources.Minerals = function(object, player, options) {
 };
 
 RTS.Resources.Minerals.load = function(loader) {
-  loader.loadModel("/js/models/Minerals.js", { type: RTS.Resources.Minerals, options: { radius: 1 } });
+  loader.loadModel("js/models/Minerals.js", { type: RTS.Resources.Minerals, options: { radius: 1 } });
 };

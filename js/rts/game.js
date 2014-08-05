@@ -4,6 +4,10 @@ RTS.Game = function() {
   this.app = new Vizi.Application({ container: this.container, displayStats: true });
   this.running = false;
 
+  this.pointerLock = new RTS.PointerLock(this.container);
+  this.fullscreen = new RTS.Fullscreen(this.container);
+  this.cursor = new RTS.Cursor();
+
   RTS.Game.instance = this;
 
   this.initializeGame();
@@ -97,17 +101,16 @@ RTS.Game.prototype.run = function() {
   this.running = true;
 };
 
-RTS.Game.prototype.fullscreen = function() {
-  var elem = this.container;
-  if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-  } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-  }
+RTS.Game.prototype.maximize = function() {
+  // this.fullscreen.request();
+};
+
+RTS.Game.prototype.lockPointer = function() {
+  this.pointerLock.request();
+};
+
+RTS.Game.prototype.releasePointer = function() {
+  this.pointerLock.release();
 };
 
 RTS.Game.prototype.startMatch = function(match) {

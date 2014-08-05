@@ -14,11 +14,15 @@
     <link rel="stylesheet" href="application.css">
   </head>
   <body>
-    <div id="hud">
-      <span id="minerals"></span>
+    <div id ="lock">
+      <div>Click here to start...</div>
     </div>
 
-    <div id="container"></div>
+    <div id="container">
+      <div id="hud">
+        <span id="minerals"></span>
+      </div>
+    </div>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/vizi.js"></script>
     <script src="js/engine.js"></script>
@@ -98,6 +102,17 @@
       game.run();
       game.startMatch(match);
       game.currentMatch.addPlayer(me);
+
+      $(document).ready(function() {
+        $("#lock").on("click", function() {
+          $(this).remove();
+        });
+      });
+    </script>
+    <script>
+      var gui = require('nw.gui');
+      gui.Window.get().enterKioskMode();
+      gui.Window.get().enterKioskMode();
     </script>
   </body>
 </html>

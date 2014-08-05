@@ -13,5 +13,5 @@ RTS.Buildings.CommandCentre.load = function(loader, options) {
   options["width"] = 20;
   options["depth"] = 20;
 
-  loader.loadModel("/js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: options });
+  loader.loadModel("js/models/CommandCentre.js", { type: RTS.Buildings.CommandCentre, options: options });
 };

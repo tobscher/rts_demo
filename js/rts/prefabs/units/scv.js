@@ -19,5 +19,5 @@ RTS.Units.SCV = function(object, player, options) {
 RTS.Units.SCV.load = function(loader, options) {
   options["radius"] = 0.8;
 
-  loader.loadModel("/js/models/SCV.js", { type: RTS.Units.SCV, options: options });
+  loader.loadModel("js/models/SCV.js", { type: RTS.Units.SCV, options: options });
 };

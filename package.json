@@ -1,6 +1,10 @@
 {
+  "main": "public/index.html",
   "name": "rts",
   "version": "0.0.1",
+  "window": {
+    "toolbar": false
+  },
   "devDependencies": {
     "gulp": "~3.6.0",
     "gulp-concat": "~2.2.0",

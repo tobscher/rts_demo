@@ -18,5 +18,5 @@ RTS.Units.Tank = function(object, player, options) {
 };
 
 RTS.Units.Tank.load = function(loader) {
-  loader.loadModel("/js/models/Tank.js", { type: RTS.Units.Tank, options: { radius: 1 }});
+  loader.loadModel("js/models/Tank.js", { type: RTS.Units.Tank, options: { radius: 1 }});
 };
