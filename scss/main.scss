@@ -29,14 +29,40 @@
   }
 }
 
-#cursor {
-  position: absolute;
-  width: 128px;
-  height: 128px;
-  z-index: 10;
+body {
+  &.cursor {
+    cursor: url(cursors/SC2-cursor.cur), auto;
+  }
 
-  &.default {
-    background: url("/cursors/Arrow.png") no-repeat;
-    background-size: 100%;
+  &.cursor-top {
+    cursor: url(cursors/cursor-edgescroll-top.cur), auto;
+  }
+
+  &.cursor-left {
+    cursor: url(cursors/cursor-edgescroll-left.cur), auto;
+  }
+
+  &.cursor-right {
+    cursor: url(cursors/cursor-edgescroll-right.cur), auto;
+  }
+
+  &.cursor-bottom {
+    cursor: url(cursors/cursor-edgescroll-bottom.cur), auto;
+  }
+
+  &.cursor-top-left{
+    cursor: url(cursors/cursor-edgescroll-top-left.cur), auto;
+  }
+
+  &.cursor-top-right {
+    cursor: url(cursors/cursor-edgescroll-top-right.cur), auto;
+  }
+
+  &.cursor-bottom-left {
+    cursor: url(cursors/cursor-edgescroll-bottom-left.cur), auto;
+  }
+
+  &.cursor-bottom-right {
+    cursor: url(cursors/cursor-edgescroll-bottom-right.cur), auto;
   }
 }

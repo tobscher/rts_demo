@@ -1,17 +1,16 @@
 RTS.Cursor = function() {
-  this.element = document.createElement('div');
-  this.element.setAttribute("id", "cursor");
-  this.state = "default";
-
-  $(this.element).addClass("default");
-
-  $("#container").append(this.element);
+  this.$element = $("body");
+  this.element = this.$element[0];
+  this.currentCursor = "cursor";
 
   RTS.Cursor.instance = this;
 };
 
-RTS.Cursor.prototype.update = function(position) {
-  var d = this.element;
-  d.style.left = position.x + "px";
-  d.style.top = position.y + "px";
+RTS.Cursor.prototype.set = function(cursorName) {
+  if (this.currentCursor == cursorName) return;
+
+  this.$element.removeClass();
+  this.$element.addClass(cursorName);
+
+  this.currentCursor = cursorName;
 };

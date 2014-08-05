@@ -25,6 +25,8 @@ RTS.EdgeScrollingScript.prototype.update = function() {
 RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var mouseInput = Vizi.Services.input.mouse.state;
   var boundaries = RTS.Services.Boundaries.instance;
+  var cursor = RTS.Cursor.instance;
+  var cursorName = "cursor";
 
   if (mouseInput.x == Vizi.Mouse.NO_POSITION ||
       mouseInput.y == Vizi.Mouse.NO_POSITION ||
@@ -42,6 +44,12 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var right = xpos >= innerWidth;
   var top = ypos <= this.scrollTolerance;
   var down = ypos >= innerHeight;
+
+  if (top) cursorName = cursorName + "-top";
+  if (down) cursorName = cursorName + "-bottom";
+  if (left) cursorName = cursorName + "-left";
+  if (right) cursorName = cursorName + "-right";
+  cursor.set(cursorName);
 
   // Reset camera if outside of map
   if (!boundaries.insideBounds) {
