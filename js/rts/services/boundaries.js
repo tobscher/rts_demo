@@ -93,7 +93,7 @@ RTS.Services.Boundaries.prototype.updateBottom = function() {
 RTS.Services.Boundaries.prototype.checkBoundaries = function() {
   var result = true;
 
-  if (this.topLeft.equals(this.nullVector)) result  =false;
+  if (this.topLeft.equals(this.nullVector)) result  = false;
   if (this.topRight.equals(this.nullVector)) result = false;
   if (this.bottomLeft.equals(this.nullVector)) result = false;
   if (this.bottomRight.equals(this.nullVector)) result = false;
@@ -138,11 +138,21 @@ RTS.Services.Boundaries.prototype.getPoint = function(x, y) {
   var intersects = ray.intersectObjects([object], true);
 
   if ( intersects.length > 0 ) {
-    var p = intersects[ 0 ].point;
+    var p = intersects[0].point;
     return new THREE.Vector3(p.x, 1, p.z);
   }
 
   return this.nullVector;
+};
+
+RTS.Services.Boundaries.prototype.setTo = function(point) {
+  var distance = this.topLeft.distanceTo(this.bottomLeft);
+  var center = distance / 2;
+
+  this.validCameraPosition.set(point.x, this.validCameraPosition.y, point.z + 50 + center);
+  var camera = Vizi.Graphics.instance.camera;
+  camera.position.copy(this.validCameraPosition);
+  this.boundariesNeedUpdating = true;
 };
 
 RTS.Services.Boundaries.instance = null;

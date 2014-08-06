@@ -3,9 +3,11 @@ RTS.Fullscreen = function(element) {
 };
 
 RTS.Fullscreen.prototype.request = function() {
-  var gui = require('nw.gui');
-  gui.Window.get().enterKioskMode();
-  gui.Window.get().enterKioskMode();
+  if (typeof(require) !== 'undefined') {
+    var gui = require('nw.gui');
+    gui.Window.get().enterKioskMode();
+    gui.Window.get().enterKioskMode();
+  }
 };
 
 RTS.Fullscreen.prototype.release = function() {

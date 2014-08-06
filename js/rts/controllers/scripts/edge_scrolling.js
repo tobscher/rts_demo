@@ -51,7 +51,6 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   if (right) cursorName = cursorName + "-right";
   cursor.set(cursorName);
 
-  // Reset camera if outside of map
   if (!boundaries.insideBounds) {
     boundaries.resetBoundaries();
 

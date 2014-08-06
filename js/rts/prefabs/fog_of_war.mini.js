@@ -14,6 +14,7 @@ RTS.FogOfWarMini = function(options) {
   });
 
   var mesh = new THREE.Mesh(geometry, material);
+  // mesh.ignorePick = true;
   mesh.position.y = 5;
   mesh.rotation.x = -Math.PI/2;
 
@@ -24,6 +25,16 @@ RTS.FogOfWarMini = function(options) {
   });
 
   fogOfWar.addComponent(visual);
+
+  var picker = new Vizi.Picker();
+  fogOfWar.addComponent(picker);
+
+  picker.addEventListener("mousedown", function(e) {
+    // Left click
+    if (e.button == 0) {
+      RTS.Services.Boundaries.instance.setTo(new THREE.Vector3(e.point.x, e.point.z, -e.point.y));
+    }
+  });
 
   return fogOfWar;
 };
