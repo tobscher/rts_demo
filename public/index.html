@@ -28,6 +28,8 @@
     <script src="js/engine.js"></script>
     <script>
       var game = new RTS.Game();
+      game.maximize();
+
       var map = new RTS.Map();
       var mini = new RTS.MapMini();
       var match = new RTS.Match({map: map, mini: mini});
@@ -108,11 +110,6 @@
           $(this).remove();
         });
       });
-    </script>
-    <script>
-      var gui = require('nw.gui');
-      gui.Window.get().enterKioskMode();
-      gui.Window.get().enterKioskMode();
     </script>
     <script>
       $(document).keydown(function(e) {

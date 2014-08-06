@@ -1,10 +1,9 @@
 RTS.Game = function() {
   // Create Vizi application
   this.container = document.getElementById("container");
-  this.app = new Vizi.Application({ container: this.container, displayStats: true });
+  this.app = new Vizi.Application({ container: this.container, displayStats: true, alpha: false });
   this.running = false;
 
-  this.pointerLock = new RTS.PointerLock(this.container);
   this.fullscreen = new RTS.Fullscreen(this.container);
   this.cursor = new RTS.Cursor();
 
@@ -102,7 +101,7 @@ RTS.Game.prototype.run = function() {
 };
 
 RTS.Game.prototype.maximize = function() {
-  // this.fullscreen.request();
+  this.fullscreen.request();
 };
 
 RTS.Game.prototype.lockPointer = function() {
