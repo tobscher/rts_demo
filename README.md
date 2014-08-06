@@ -1,11 +1,11 @@
 # RTS Demo
 ## Prerequisites
 
-* [node-webkit](https://github.com/rogerwang/node-webkit)
+All dependencies are managed via the package.json file. Simply run `npm install` to install all dependencies.
 
 ## Start the application
 
-Run the following commnad (assuming node-webkit is aliased to nw):
+Run the following command:
 ```
-$ nw ./
+$ node_modules/nodewebkit/bin/nodewebkit ./
 ```
