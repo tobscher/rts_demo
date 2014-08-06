@@ -29,13 +29,16 @@ RTS.Map = function(options) {
   var picker = new Vizi.Picker();
   map.addComponent(picker);
 
-  picker.addEventListener("mousedown", function(event) {
-    clickCircleScript.showAt(event.point);
-    var selected = RTS.WorldObject.currentlySelected;
+  picker.addEventListener("mousedown", function(e) {
+    if (e.button == 2) {
+      clickCircleScript.showAt(e.point);
 
-    if (selected != null) {
-      if (selected.handleMapClicked) {
-        selected.handleMapClicked(event.point);
+      var selected = RTS.WorldObject.currentlySelected;
+
+      if (selected != null) {
+        if (selected.handleMapClicked) {
+          selected.handleMapClicked(e.point);
+        }
       }
     }
   });

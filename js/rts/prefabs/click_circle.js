@@ -13,6 +13,7 @@ RTS.ClickCircle = function(options) {
   geometry.vertices.shift();
 
   var l = new THREE.Line( geometry, material );
+  l.ignorePick = true;
   var line = new Vizi.Visual({ object: l });
   circle.addComponent(line);
 
