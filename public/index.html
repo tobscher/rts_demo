@@ -114,5 +114,20 @@
       gui.Window.get().enterKioskMode();
       gui.Window.get().enterKioskMode();
     </script>
+    <script>
+      $(document).keydown(function(e) {
+        // F6
+        if (e.keyCode == 117) {
+          var gui = require('nw.gui');
+          gui.Window.get().showDevTools();
+        }
+
+        // F10
+        if (e.keyCode == 121) {
+          var gui = require('nw.gui');
+          gui.App.quit();
+        }
+      });
+    </script>
   </body>
 </html>
