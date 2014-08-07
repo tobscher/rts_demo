@@ -29,7 +29,9 @@ RTS.Game.prototype.addHUD = function() {
   this.hudLayer = graphics.addLayer("hud", hudCamera, {
     viewport: { x: 0, y: 0, width: this.container.offsetWidth, height: 220 },
     position: new THREE.Vector3(0, 0, 10),
-    clearColor: { color: 0x444444, alpha: 1 }
+    autoClearColor: true,
+    clear: true,
+    clearColor: { color: 0x444444, alpha: 1 },
   });
 };
 
