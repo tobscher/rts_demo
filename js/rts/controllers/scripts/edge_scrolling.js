@@ -7,11 +7,6 @@ RTS.EdgeScrollingScript = function(options) {
   this.clock = new THREE.Clock();
   this.scrollSpeed = 100;
   this.scrollTolerance = 1;
-
-  this.lockedLeft = false;
-  this.lockedRight = false;
-  this.lockedTop = false;
-  this.lockedDown = false;
 };
 
 inherits(RTS.EdgeScrollingScript, Vizi.Script);
@@ -88,7 +83,5 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
     if (destination.z > cameraLock.bottom) destination.z = cameraLock.bottom;
 
     this._camera.position.copy(destination);
-
-    logger.log(JSON.stringify(destination));
   }
 };

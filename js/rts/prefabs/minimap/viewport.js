@@ -28,6 +28,8 @@ RTS.Minimap.ViewportScript = function(options) {
   options = options || {};
 
   Vizi.Script.call(this, options);
+
+  RTS.Minimap.ViewportScript.instance = this;
 };
 
 inherits(RTS.Minimap.ViewportScript, Vizi.Script);
@@ -37,7 +39,6 @@ RTS.Minimap.ViewportScript.prototype.realize = function() {
 };
 
 RTS.Minimap.ViewportScript.prototype.update = function() {
-  this.updateViewport();
 };
 
 RTS.Minimap.ViewportScript.prototype.updateViewport = function() {

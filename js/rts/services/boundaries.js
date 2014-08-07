@@ -6,6 +6,13 @@ RTS.Services.Boundaries = function() {
 
   this.projector = new THREE.Projector();
 
+  this.updateIfChanged = function(oldPosition, newPosition) {
+    if (!oldPosition.equals(newPosition)) {
+      oldPosition.copy(newPosition);
+      this.changed = true;
+    }
+  };
+
   RTS.Services.Boundaries.instance = this;
 };
 
@@ -20,70 +27,28 @@ RTS.Services.Boundaries.prototype.update = function() {
 
 
 RTS.Services.Boundaries.prototype.updateBoundaries = function() {
-  this.updateTopLeft();
-  this.updateTopRight();
-  this.updateBottomLeft();
-  this.updateBottomRight();
-};
+  this.changed = false;
 
-RTS.Services.Boundaries.prototype.updateTopLeft = function() {
-  if (!this.topLeft) return;
+  var topLeft     = this.getPoint(0, 0),
+      topRight    = this.getPoint(window.innerWidth, 0),
+      bottomLeft  = this.getPoint(0, window.innerHeight - 220),
+      bottomRight = this.getPoint(window.innerWidth, window.innerHeight - 220);
 
-  var point = this.getPoint(0, 0);
-
-  if (point != null) {
-    this.topLeft.copy(point);
+  if (topLeft     == null ||
+      topRight    == null ||
+      bottomLeft  == null ||
+      bottomRight == null ) {
+    return;
   }
-};
 
-RTS.Services.Boundaries.prototype.updateTopRight = function() {
-  if (!this.topRight) return;
+  this.updateIfChanged(this.topLeft, topLeft);
+  this.updateIfChanged(this.topRight, topRight);
+  this.updateIfChanged(this.bottomLeft, bottomLeft);
+  this.updateIfChanged(this.bottomRight, bottomRight);
 
-  var point = this.getPoint(window.innerWidth, 0);
-
-  if (point != null) {
-    this.topRight.copy(point);
+  if (this.changed) {
+    RTS.Minimap.ViewportScript.instance.updateViewport();
   }
-};
-
-RTS.Services.Boundaries.prototype.updateBottomLeft = function() {
-  if (!this.bottomLeft) return;
-
-  var point = this.getPoint(0, window.innerHeight - 220);
-
-  if (point != null) {
-    this.bottomLeft.copy(point);
-  }
-};
-
-RTS.Services.Boundaries.prototype.updateBottomRight = function() {
-  if (!this.bottomRight) return;
-
-  var point = this.getPoint(window.innerWidth, window.innerHeight - 220);
-
-  if (point != null) {
-    this.bottomRight.copy(point);
-  }
-};
-
-RTS.Services.Boundaries.prototype.updateLeft = function() {
-  this.updateTopLeft();
-  this.updateBottomLeft();
-};
-
-RTS.Services.Boundaries.prototype.updateRight = function() {
-  this.updateTopRight();
-  this.updateBottomRight();
-};
-
-RTS.Services.Boundaries.prototype.updateTop = function() {
-  this.updateTopLeft();
-  this.updateTopRight();
-};
-
-RTS.Services.Boundaries.prototype.updateBottom = function() {
-  this.updateBottomLeft();
-  this.updateBottomRight();
 };
 
 RTS.Services.Boundaries.prototype.getPoint = function(x, y) {
@@ -129,8 +94,9 @@ RTS.Services.Boundaries.prototype.setTo = function(point) {
   if (newPosition.z < cameraLock.top) newPosition.z = cameraLock.top;
   if (newPosition.z > cameraLock.bottom) newPosition.z = cameraLock.bottom;
 
-  camera.position.copy(newPosition);
   logger.log(JSON.stringify(newPosition));
+
+  camera.position.copy(newPosition);
 };
 
 RTS.Services.Boundaries.instance = null;

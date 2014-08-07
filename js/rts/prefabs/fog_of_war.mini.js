@@ -30,8 +30,17 @@ RTS.FogOfWarMini = function(options) {
   fogOfWar.addComponent(picker);
 
   picker.addEventListener("mousedown", function(e) {
+    var point = new THREE.Vector3(e.point.x, e.point.z, -e.point.y);
     if (e.button == 0) {
-      RTS.Services.Boundaries.instance.setTo(new THREE.Vector3(e.point.x, e.point.z, -e.point.y));
+      RTS.Services.Boundaries.instance.setTo(point);
+    } else if (e.button == 2) {
+      var selected = RTS.WorldObject.currentlySelected;
+
+      if (selected != null) {
+        if (selected.handleMapClicked) {
+          selected.handleMapClicked(point);
+        }
+      }
     }
   });
 
