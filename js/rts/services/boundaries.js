@@ -1,14 +1,10 @@
 RTS.Services.Boundaries = function() {
-  this.nullVector = new THREE.Vector3(0,0,0);
-
   this.topLeft = new THREE.Vector3(0,0,0);
   this.topRight = new THREE.Vector3(0,0,0);
   this.bottomLeft = new THREE.Vector3(0,0,0);
   this.bottomRight = new THREE.Vector3(0,0,0);
 
   this.projector = new THREE.Projector();
-  this.insideBounds = true;
-  this.boundariesNeedUpdating = false;
 
   RTS.Services.Boundaries.instance = this;
 };
@@ -19,25 +15,9 @@ RTS.Services.Boundaries.initialize = function(options) {
 };
 
 RTS.Services.Boundaries.prototype.update = function() {
-  if (this.boundariesNeedUpdating) {
-    this.updateBoundaries();
-    this.checkBoundaries();
-
-    this.boundariesNeedUpdating = false;
-  }
+  this.updateBoundaries();
 };
 
-RTS.Services.Boundaries.prototype.resetBoundaries = function() {
-  this.topLeft = this.topLeftOld.clone();
-  this.topRight = this.topRightOld.clone();
-  this.bottomRight = this.bottomRightOld.clone();
-  this.bottomLeft = this.bottomLeftOld.clone();
-
-  var camera = Vizi.Graphics.instance.camera;
-  camera.position.copy(this.validCameraPosition);
-
-  this.boundariesNeedUpdating = true;
-};
 
 RTS.Services.Boundaries.prototype.updateBoundaries = function() {
   this.updateTopLeft();
@@ -49,25 +29,41 @@ RTS.Services.Boundaries.prototype.updateBoundaries = function() {
 RTS.Services.Boundaries.prototype.updateTopLeft = function() {
   if (!this.topLeft) return;
 
-  this.topLeft.copy(this.getPoint(0, 0));
+  var point = this.getPoint(0, 0);
+
+  if (point != null) {
+    this.topLeft.copy(point);
+  }
 };
 
 RTS.Services.Boundaries.prototype.updateTopRight = function() {
   if (!this.topRight) return;
 
-  this.topRight.copy(this.getPoint(window.innerWidth, 0));
+  var point = this.getPoint(window.innerWidth, 0);
+
+  if (point != null) {
+    this.topRight.copy(point);
+  }
 };
 
 RTS.Services.Boundaries.prototype.updateBottomLeft = function() {
   if (!this.bottomLeft) return;
 
-  this.bottomLeft.copy(this.getPoint(0, window.innerHeight - 220));
+  var point = this.getPoint(0, window.innerHeight - 220);
+
+  if (point != null) {
+    this.bottomLeft.copy(point);
+  }
 };
 
 RTS.Services.Boundaries.prototype.updateBottomRight = function() {
   if (!this.bottomRight) return;
 
-  this.bottomRight.copy(this.getPoint(window.innerWidth, window.innerHeight - 220));
+  var point = this.getPoint(window.innerWidth, window.innerHeight - 220);
+
+  if (point != null) {
+    this.bottomRight.copy(point);
+  }
 };
 
 RTS.Services.Boundaries.prototype.updateLeft = function() {
@@ -90,36 +86,8 @@ RTS.Services.Boundaries.prototype.updateBottom = function() {
   this.updateBottomRight();
 };
 
-RTS.Services.Boundaries.prototype.checkBoundaries = function() {
-  var result = true;
-
-  if (this.topLeft.equals(this.nullVector)) result  = false;
-  if (this.topRight.equals(this.nullVector)) result = false;
-  if (this.bottomLeft.equals(this.nullVector)) result = false;
-  if (this.bottomRight.equals(this.nullVector)) result = false;
-
-  // Remember last valid position
-  if (result) {
-    this.topLeftOld = this.topLeft.clone();
-    this.topRightOld = this.topRight.clone();
-    this.bottomRightOld = this.bottomRight.clone();
-    this.bottomLeftOld = this.bottomLeft.clone();
-
-    var camera = Vizi.Graphics.instance.camera;
-    this.validCameraPosition = camera.position.clone();
-  }
-
-  this.insideBounds = result;
-
-  return result;
-};
-
 RTS.Services.Boundaries.prototype.getPoint = function(x, y) {
   var match = RTS.Game.instance.currentMatch;
-
-  if (!match) {
-    return this.nullVector;
-  }
 
   var vector = new THREE.Vector3(
   ( x / window.innerWidth ) * 2 - 1,
@@ -142,17 +110,27 @@ RTS.Services.Boundaries.prototype.getPoint = function(x, y) {
     return new THREE.Vector3(p.x, 1, p.z);
   }
 
-  return this.nullVector;
+  return null;
 };
 
 RTS.Services.Boundaries.prototype.setTo = function(point) {
   var distance = this.topLeft.distanceTo(this.bottomLeft);
   var center = distance / 2;
+  var game = RTS.Game.instance;
+  var match = game.currentMatch;
+  var map = match.map;
+  var cameraLock = map.cameraLock;
 
-  this.validCameraPosition.set(point.x, this.validCameraPosition.y, point.z + 50 + center);
   var camera = Vizi.Graphics.instance.camera;
-  camera.position.copy(this.validCameraPosition);
-  this.boundariesNeedUpdating = true;
+  var newPosition = new THREE.Vector3(point.x, camera.position.y, point.z + 50 + center);
+
+  if (newPosition.x < cameraLock.left) newPosition.x = cameraLock.left;
+  if (newPosition.x > cameraLock.right) newPosition.x = cameraLock.right;
+  if (newPosition.z < cameraLock.top) newPosition.z = cameraLock.top;
+  if (newPosition.z > cameraLock.bottom) newPosition.z = cameraLock.bottom;
+
+  camera.position.copy(newPosition);
+  logger.log(JSON.stringify(newPosition));
 };
 
 RTS.Services.Boundaries.instance = null;

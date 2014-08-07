@@ -30,7 +30,6 @@ RTS.FogOfWarMini = function(options) {
   fogOfWar.addComponent(picker);
 
   picker.addEventListener("mousedown", function(e) {
-    // Left click
     if (e.button == 0) {
       RTS.Services.Boundaries.instance.setTo(new THREE.Vector3(e.point.x, e.point.z, -e.point.y));
     }

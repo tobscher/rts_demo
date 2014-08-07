@@ -45,8 +45,6 @@ RTS.Minimap.ViewportScript.prototype.updateViewport = function() {
   var boundaries = RTS.Services.Boundaries.instance;
   var vertices = visual.geometry.vertices;
 
-  if (!boundaries.insideBounds) return;
-
   // Top
   vertices[0].copy(boundaries.topLeft);
   vertices[1].copy(boundaries.topRight);

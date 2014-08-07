@@ -25,6 +25,12 @@ RTS.EdgeScrollingScript.prototype.update = function() {
 RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   var mouseInput = Vizi.Services.input.mouse.state;
   var boundaries = RTS.Services.Boundaries.instance;
+  var game = RTS.Game.instance;
+
+  var match = game.currentMatch;
+  var map = match.map;
+  var cameraLock = map.cameraLock;
+
   var cursor = RTS.Cursor.instance;
   var cursorName = "cursor";
 
@@ -51,36 +57,21 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
   if (right) cursorName = cursorName + "-right";
   cursor.set(cursorName);
 
-  if (!boundaries.insideBounds) {
-    boundaries.resetBoundaries();
-
-    this.lockedLeft = left;
-    this.lockedRight = right;
-    this.lockedTop = top;
-    this.lockedDown = down;
-
-    return;
-  }
-
   var movement = new THREE.Vector3;
   var origin = this._camera.position.clone();
 
   // Do not check against window
-  if (left && !this.lockedLeft) {
+  if (left) {
     movement.x -= this.scrollSpeed;
-    this.lockedRight = false;
-  } else if (right && !this.lockedRight) {
-    this.lockedLeft = false;
+  } else if (right) {
     movement.x += this.scrollSpeed;
   }
 
   // vertical camera movement
-  if (top && !this.lockedTop) {
+  if (top) {
     movement.z -= this.scrollSpeed;
-    this.lockedDown = false;
-  } else if (down && !this.lockedDown) {
+  } else if (down) {
     movement.z += this.scrollSpeed;
-    this.lockedTop = false;
   }
 
   // calculate desired camera position based on received input
@@ -90,7 +81,14 @@ RTS.EdgeScrollingScript.prototype.moveCamera = function(delta) {
 
   // if a change in position is detected perform the necessary update
   if (!destination.equals(origin)) {
+    // Move camera lock into separate class and apply check
+    if (destination.x < cameraLock.left) destination.x = cameraLock.left;
+    if (destination.x > cameraLock.right) destination.x = cameraLock.right;
+    if (destination.z < cameraLock.top) destination.z = cameraLock.top;
+    if (destination.z > cameraLock.bottom) destination.z = cameraLock.bottom;
+
     this._camera.position.copy(destination);
-    boundaries.boundariesNeedUpdating = true;
+
+    logger.log(JSON.stringify(destination));
   }
 };

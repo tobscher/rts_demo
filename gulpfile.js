@@ -33,7 +33,8 @@ var paths = {
     './js/rts/orders.js',
     './js/rts/startpoint.js',
     './js/rts/match.js',
-    './js/rts/window.js'
+    './js/rts/window.js',
+    './js/logger.js'
   ],
   application: [
     './js/matchmaking.js',

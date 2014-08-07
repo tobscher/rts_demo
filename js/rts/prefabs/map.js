@@ -1,15 +1,21 @@
 RTS.Map = function(options) {
   options = options || {};
 
-  this.size = 1024;
-
   var graphics = Vizi.Graphics.instance;
   var map = new Vizi.Object();
+  map.size = 1024;
+  map.cameraLock = {
+    top: -(map.size / 2 - 112),
+    left: -(map.size / 2 - 112),
+    right: map.size / 2 - 112,
+    bottom: map.size / 2 + 28
+  };
+
   var clickCircle = new RTS.ClickCircle();
   var clickCircleScript = clickCircle.getComponent(RTS.ClickCircleScript);
 
   // Visual
-  var geometry = new THREE.BoxGeometry(this.size,1,this.size);
+  var geometry = new THREE.BoxGeometry(map.size,1,map.size);
   var floorTexture = new THREE.ImageUtils.loadTexture('img/ground.png');
   floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
   floorTexture.repeat.set( 25, 25 );

@@ -66,3 +66,19 @@ body {
     cursor: url(cursors/cursor-edgescroll-bottom-right.cur), auto;
   }
 }
+
+#log {
+  position: absolute;
+  width: 600px;
+  height: 200px;
+  left: 200px;
+  bottom: 0px;
+  pointer-events: none;
+  overflow-x:hidden;
+  overflow-y:visible;
+
+  p {
+    font-size: 12px;
+    font-family: "Courier New";
+  }
+}
