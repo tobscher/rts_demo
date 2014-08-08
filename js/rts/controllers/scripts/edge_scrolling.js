@@ -7,6 +7,11 @@ RTS.EdgeScrollingScript = function(options) {
   this.clock = new THREE.Clock();
   this.scrollSpeed = 100;
   this.scrollTolerance = 1;
+
+  var game = RTS.Game.instance;
+  var folder = game.gui.addFolder('Edge Scrolling');
+  folder.add(this, "scrollSpeed");
+  folder.add(this, "scrollTolerance");
 };
 
 inherits(RTS.EdgeScrollingScript, Vizi.Script);

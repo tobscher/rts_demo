@@ -6,6 +6,7 @@ RTS.Game = function() {
 
   this.fullscreen = new RTS.Fullscreen(this.container);
   this.cursor = new RTS.Cursor();
+  this.gui = new dat.GUI();
 
   RTS.Game.instance = this;
 

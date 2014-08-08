@@ -10,10 +10,17 @@ RTS.ZoomScript = function(param)
   this.maxZoomLevel = 1;
   this.updateZoom = false;
 
-  Vizi.Script.call(this, param);
-}
+  var game = RTS.Game.instance;
+  var folder = game.gui.addFolder('Zoom');
+  folder.add(this, "minZoomLevel");
+  folder.add(this, "maxZoomLevel");
+  folder.add(this, "zoomFactor");
+  folder.add(this, "zoomSpeed");
 
-goog.inherits(RTS.ZoomScript, Vizi.Script);
+  Vizi.Script.call(this, param);
+};
+
+inherits(RTS.ZoomScript, Vizi.Script);
 
 RTS.ZoomScript.prototype.realize = function() {
   var that = this;
