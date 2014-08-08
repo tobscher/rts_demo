@@ -34,6 +34,11 @@ RTS.Game.prototype.addHUD = function() {
     clear: true,
     clearColor: { color: 0x444444, alpha: 1 },
   });
+
+  this.hudLayer.onWindowResize = function(width, height) {
+    this.setViewport(0,0,width, 220);
+    Vizi.Layer.prototype.onWindowResize.call(this, width, height);
+  };
 };
 
 RTS.Game.prototype.addLight = function() {
