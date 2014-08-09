@@ -66,7 +66,7 @@ RTS.Abilities.Move.prototype.makeMove = function(delta) {
   this.minimapUpdates++;
 
   if (this.minimapUpdates == this.minimapUpdateRate) {
-    RTS.FogOfWarMini.drawCircle(newPosition);
+    RTS.Minimap.FogOfWar.drawCircle(newPosition);
     this.minimapUpdates = 0;
   }
 

@@ -3,9 +3,8 @@ RTS.Match = function(options) {
 
   this.running = false;
   this.players = [];
-  this.hud = new RTS.HUD(this);
-
-  this.addMap(options.map, options.mini);
+  this.hud = new RTS.HUD.Wrapper();
+  this.minimap = new RTS.Minimap.Wrapper();
 };
 
 RTS.Match.prototype.start = function() {
@@ -23,15 +22,10 @@ RTS.Match.prototype.addStartpointFor = function(player) {
   startpoint.create();
 };
 
-RTS.Match.prototype.addMap = function(map, mini) {
+RTS.Match.prototype.addMap = function(map) {
+  this.app = Vizi.Application.instance;
   this.map = map;
-  this.mini = mini;
 
-  this.fog = new RTS.FogOfWar();
-  this.fogMini = new RTS.FogOfWarMini();
-
-  Vizi.Application.instance.addObject(map);
-  Vizi.Application.instance.addObject(mini);
-  Vizi.Application.instance.addObject(this.fog);
-  Vizi.Application.instance.addObject(this.fogMini);
+  this.app.addObject(map);
+  this.app.addObject(map.mini);
 };

@@ -28,24 +28,7 @@ RTS.WorldObject = function(object, player, options) {
 
   var game = RTS.Game.instance;
 
-  var miniColor = player.colour;
-  var height = 1;
-
-  var me = RTS.HumanPlayer.instance;
-  if (player.id == me.id) {
-    miniColor = 0x00ff00;
-    height = 3;
-  }
-
-  object.mini = new Vizi.Object({layer: game.mapLayer});
-  var geometry = new THREE.BoxGeometry(options.width, height, options.depth);
-  var material = new THREE.MeshBasicMaterial({ color: miniColor});
-  var visual = new Vizi.Visual({
-    geometry: geometry,
-    material: material
-  });
-
-  object.mini.addComponent(visual);
+  object.mini = new RTS.Minimap.WorldObject(player, options);
   game.app.addObject(object.mini);
 };
 
@@ -72,7 +55,7 @@ RTS.WorldObjectScript.prototype.realize = function() {
 
   if (this.owner == me.id) {
     RTS.HumanPlayer.instance.worldObjects.push(object.mini.transform.position);
-    RTS.FogOfWarMini.drawCircle(object.mini.transform.position);
+    RTS.Minimap.FogOfWar.drawCircle(object.mini.transform.position);
   }
 
   visual.material.materials[0].color = this.colour;
@@ -97,5 +80,5 @@ RTS.WorldObjectScript.prototype.select = function() {
   selectable.show();
 
   RTS.WorldObject.currentlySelected = object;
-  RTS.HUD.instance.updateSelection(object.name);
+  RTS.HUD.instance.selection.setName(object.name);
 };

@@ -9,7 +9,7 @@ RTS.FogOfWar = function(options) {
   var geometry = new THREE.PlaneGeometry(this.size,this.size);
   var material = new THREE.MeshBasicMaterial({
     color: 0x000000,
-    alphaMap: RTS.FogOfWarMini.getTexture(),
+    alphaMap: RTS.Minimap.FogOfWar.getTexture(),
     transparent: true
   });
 

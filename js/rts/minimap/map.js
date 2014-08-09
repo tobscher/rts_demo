@@ -1,10 +1,11 @@
-RTS.MapMini = function(options) {
+// TODO: Replace with image
+RTS.Minimap.Map = function(options) {
   options = options || {};
 
   this.size = 1024;
 
-  var game = RTS.Game.instance;
-  var map = new Vizi.Object({layer: game.mapLayer});
+  var minimap = RTS.Minimap.instance;
+  var map = new Vizi.Object({layer: minimap.layer});
 
   // Visual
   var geometry = new THREE.BoxGeometry(this.size,1,this.size);

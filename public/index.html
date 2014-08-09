@@ -58,9 +58,9 @@
       var game = new RTS.Game();
       game.maximize();
 
+      var match = new RTS.Match();
       var map = new RTS.Map();
-      var mini = new RTS.MapMini();
-      var match = new RTS.Match({map: map, mini: mini});
+      match.addMap(map);
 
       // Do this manually to not rely on network service
       var me = new RTS.HumanPlayer({

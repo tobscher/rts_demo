@@ -13,6 +13,7 @@ RTS.Map = function(options) {
 
   var clickCircle = new RTS.ClickCircle();
   var clickCircleScript = clickCircle.getComponent(RTS.ClickCircleScript);
+  map.addChild(clickCircle);
 
   // Visual
   var geometry = new THREE.BoxGeometry(map.size,1,map.size);
@@ -49,7 +50,10 @@ RTS.Map = function(options) {
     }
   });
 
-  map.addChild(clickCircle);
+  var fogOfWar = new RTS.FogOfWar();
+  map.addChild(fogOfWar);
+
+  map.mini = new RTS.Minimap.Map();
 
   return map;
 };

@@ -5,7 +5,7 @@ RTS.EdgeScrollingScript = function(options) {
 
   this._camera = (options.camera !== undefined) ? options.camera : null;
   this.clock = new THREE.Clock();
-  this.scrollSpeed = 100;
+  this.scrollSpeed = 150;
   this.scrollTolerance = 1;
 
   var game = RTS.Game.instance;

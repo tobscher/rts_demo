@@ -1,15 +1,15 @@
-RTS.FogOfWarMini = function(options) {
+RTS.Minimap.FogOfWar = function(options) {
   options = options || {};
 
   this.size = 1024;
 
-  var game = RTS.Game.instance;
-  var fogOfWar = new Vizi.Object({layer: game.mapLayer});
+  var minimap = RTS.Minimap.instance;
+  var fogOfWar = new Vizi.Object({layer: minimap.layer});
 
   var geometry = new THREE.PlaneGeometry(this.size,this.size);
   var material = new THREE.MeshBasicMaterial({
     color: 0x000000,
-    alphaMap: RTS.FogOfWarMini.getTexture(),
+    alphaMap: RTS.Minimap.FogOfWar.getTexture(),
     transparent: true
   });
 
@@ -47,7 +47,7 @@ RTS.FogOfWarMini = function(options) {
   return fogOfWar;
 };
 
-RTS.FogOfWarMini.getTexture = function() {
+RTS.Minimap.FogOfWar.getTexture = function() {
   if (this.texture) {
     return this.texture;
   }
@@ -70,7 +70,7 @@ RTS.FogOfWarMini.getTexture = function() {
   return this.texture;
 };
 
-RTS.FogOfWarMini.drawCircle = function(vector) {
+RTS.Minimap.FogOfWar.drawCircle = function(vector) {
   var game = RTS.Game.instance;
   var size = 1024;
   var offset = size / 2;

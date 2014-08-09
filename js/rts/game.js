@@ -17,36 +17,27 @@ RTS.Game.instance = null;
 
 RTS.Game.prototype.initializeGame = function() {
   this.addCamera();
-  this.addMinimap();
   this.addLight();
 };
 
 RTS.Game.prototype.addLight = function() {
   var light = new Vizi.Object();
-  var lightMini = new Vizi.Object({ layer: this.mapLayer });
 
-  function newLightComponent() {
-    var directionalLight = new Vizi.DirectionalLight({
-      intensity: 1,
-      direction: new THREE.Vector3(0, -1, 0)
-    });
-    directionalLight.position.set(0,1,0);
+  var directionalLight = new Vizi.DirectionalLight({
+    intensity: 1,
+    direction: new THREE.Vector3(0, -1, 0)
+  });
+  directionalLight.position.set(0,1,0);
 
-    return directionalLight
-  }
+  light.addComponent(directionalLight);
 
-  light.addComponent(newLightComponent());
-  lightMini.addComponent(newLightComponent());
-
-  // Add light to the scene
   this.app.addObject(light);
-  this.app.addObject(lightMini);
 };
 
 RTS.Game.prototype.addCamera = function() {
   this.cam = new Vizi.PerspectiveCamera({
     active: true,
-    fov: 40,
+    fov: 60,
     near: 1,
     far: 10000
   });
@@ -55,31 +46,6 @@ RTS.Game.prototype.addCamera = function() {
   camera.addComponent(this.cam);
 
   this.app.addObject(camera);
-};
-
-RTS.Game.prototype.addMinimap = function() {
-  var graphics = Vizi.Graphics.instance;
-
-  var width = 1024;
-  var height = 1024;
-  var mapCamera = new THREE.OrthographicCamera(
-      width / -2,   // Left
-      width / 2,    // Right
-      height / 2,   // Top
-      height / -2,  // Bottom
-      -5000,                  // Near
-      10000 );                // Far
-  this.mapLayer = graphics.addLayer("minimap", mapCamera, {
-    up: new THREE.Vector3(0,0,-1),
-    lookAt: new THREE.Vector3(0,-1,0),
-    viewport: { x: 10, y: 10, width: 192, height: 192}
-  });
-
-  graphics.scene.add(mapCamera);
-
-  this.minimap = new RTS.Minimap.Viewport();
-  this.minimapAspect = width/192;
-  this.app.addObject(this.minimap);
 };
 
 RTS.Game.prototype.run = function() {

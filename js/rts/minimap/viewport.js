@@ -1,8 +1,8 @@
 RTS.Minimap.Viewport = function(options) {
   options = options || {};
 
-  var game = RTS.Game.instance;
-  var viewport = new Vizi.Object({layer: game.mapLayer});
+  var minimap = RTS.Minimap.instance;
+  var viewport = new Vizi.Object({layer: minimap.layer});
 
   // Visual
   var material = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 1 } );

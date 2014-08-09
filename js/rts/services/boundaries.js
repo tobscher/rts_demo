@@ -53,6 +53,7 @@ RTS.Services.Boundaries.prototype.updateBoundaries = function() {
 
 RTS.Services.Boundaries.prototype.getPoint = function(x, y) {
   var match = RTS.Game.instance.currentMatch;
+  if (!match) return;
 
   var vector = new THREE.Vector3(
   ( x / window.innerWidth ) * 2 - 1,
