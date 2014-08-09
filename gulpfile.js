@@ -37,7 +37,9 @@ var paths = {
     './js/rts/startpoint.js',
     './js/rts/match.js',
     './js/rts/window.js',
-    './js/logger.js'
+    './js/rts/selection.js',
+    './js/logger.js',
+    './js/debug.js'
   ],
   application: [
     './js/matchmaking.js',
