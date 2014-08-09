@@ -8,7 +8,9 @@ RTS.Selection.prototype.select = function(elements) {
   this.selected = elements;
 
   if (elements.length == 1) {
-    RTS.HUD.instance.selection.setName(elements[0].name);
+    var hud = RTS.HUD.instance;
+    hud.selection.setName(elements[0].name);
+    hud.commands.set(elements[0].commands);
   }
 };
 

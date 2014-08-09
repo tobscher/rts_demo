@@ -16,6 +16,8 @@ RTS.WorldObject = function(object, player, options) {
   var script = new RTS.WorldObjectScript(options);
   var picker = new Vizi.Picker();
 
+  object.commands = [];
+
   object.addChild(selectable);
   object.addComponent(script);
   object.addComponent(picker);

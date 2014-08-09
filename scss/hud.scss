@@ -60,7 +60,7 @@
     #selection {
       position: absolute;
       left: 212px;
-      right: 220px;
+      right: 350px;
       bottom: 0px;
       height: 200px;
       background-color: #111;
@@ -75,11 +75,11 @@
       }
     }
 
-    #orders {
+    #commands {
       position: absolute;
       right: 0px;
       bottom: 0px;
-      width: 200px;
+      width: 340px;
       height: 200px;
       background-color: #111;
 
@@ -88,6 +88,25 @@
       padding: 10px;
 
       .grid {
+        font-size: 14pt;
+
+        .command {
+          img {
+            width: 32px;
+            height: 32px;
+          }
+
+          > div {
+            vertical-align: top;
+            margin: 5px 10px;
+            display: inline-block;
+          }
+
+          .action {
+            color: #FFA500;
+          }
+        }
+
         .row {
           width: 100%;
           clear: left;
@@ -109,11 +128,11 @@
             margin: 2px 2px 2px 0px;
           }
 
-          .cell-2 {
+          .cell-2, .cell-3, .cell-4 {
             margin: 2px;
           }
 
-          .cell-3 {
+          .cell-5 {
             margin: 2px 0px 2px 2px;
           }
         }

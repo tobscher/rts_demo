@@ -41,9 +41,10 @@ RTS.Map = function(options) {
     if (e.button == 2) {
       clickCircleScript.showAt(e.point);
 
-      var selected = RTS.WorldObject.currentlySelected;
+      var selection = RTS.HumanPlayer.instance.selection.selected;
 
-      if (selected != null) {
+      if (selection.length > 0) {
+        var selected = selection[0];
         if (selected.handleMapClicked) {
           selected.handleMapClicked(e.point);
         }

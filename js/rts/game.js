@@ -38,7 +38,7 @@ RTS.Game.prototype.addLight = function() {
 RTS.Game.prototype.addCamera = function() {
   this.cam = new Vizi.PerspectiveCamera({
     active: true,
-    fov: 60,
+    fov: 50,
     near: 1,
     far: 10000
   });

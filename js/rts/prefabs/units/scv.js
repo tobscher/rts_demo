@@ -13,6 +13,8 @@ RTS.Units.SCV = function(object, player, options) {
     move.mapClicked(position);
   }
 
+  object.commands.push(new RTS.Commands.PrimaryMove());
+
   return object;
 };
 

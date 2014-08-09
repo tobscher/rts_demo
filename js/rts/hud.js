@@ -5,6 +5,7 @@ RTS.HUD.Wrapper = function() {
 
   this.selection = new RTS.HUD.Selection(this.container);
   this.resources = new RTS.HUD.Resources(this.container);
+  this.commands = new RTS.HUD.Commands(this.container);
 
   RTS.HUD.instance = this;
 };
