@@ -5,6 +5,7 @@ RTS.Minimap.FogOfWar = function(options) {
 
   var minimap = RTS.Minimap.instance;
   var fogOfWar = new Vizi.Object({layer: minimap.layer});
+  fogOfWar.name = "Fog Of War (Minimap)";
 
   var geometry = new THREE.PlaneGeometry(this.size,this.size);
   var material = new THREE.MeshBasicMaterial({

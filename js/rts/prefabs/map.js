@@ -3,6 +3,7 @@ RTS.Map = function(options) {
 
   var graphics = Vizi.Graphics.instance;
   var map = new Vizi.Object();
+  map.name = "Map";
   map.size = 1024;
   map.cameraLock = {
     top: -(map.size / 2 - 112),

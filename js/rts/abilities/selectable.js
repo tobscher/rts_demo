@@ -38,6 +38,9 @@ RTS.SelectableScript = function(options) {
 
 inherits(RTS.SelectableScript, RTS.Abilities.Base);
 
+RTS.SelectableScript.prototype.realize = function() {
+}
+
 RTS.SelectableScript.prototype.update = function() {
 };
 

@@ -5,6 +5,7 @@ RTS.FogOfWar = function(options) {
 
   var game = RTS.Game.instance;
   var fogOfWar = new Vizi.Object();
+  fogOfWar.name = "Fog Of War";
 
   var geometry = new THREE.PlaneGeometry(this.size,this.size);
   var material = new THREE.MeshBasicMaterial({

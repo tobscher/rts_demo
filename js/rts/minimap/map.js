@@ -6,6 +6,7 @@ RTS.Minimap.Map = function(options) {
 
   var minimap = RTS.Minimap.instance;
   var map = new Vizi.Object({layer: minimap.layer});
+  map.name = "Map (Minimap)";
 
   // Visual
   var geometry = new THREE.BoxGeometry(this.size,1,this.size);

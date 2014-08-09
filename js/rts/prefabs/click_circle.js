@@ -2,6 +2,7 @@ RTS.ClickCircle = function(options) {
   options = options || {};
 
   var circle = new Vizi.Object();
+  circle.name = "Click Circle";
 
   // Visual
   var radius   = 4,

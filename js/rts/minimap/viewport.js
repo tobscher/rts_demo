@@ -3,6 +3,7 @@ RTS.Minimap.Viewport = function(options) {
 
   var minimap = RTS.Minimap.instance;
   var viewport = new Vizi.Object({layer: minimap.layer});
+  viewport.name = "Viewport (Minimap)";
 
   // Visual
   var material = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 1 } );

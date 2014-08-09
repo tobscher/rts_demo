@@ -12,6 +12,7 @@ RTS.Minimap.WorldObject = function(player, options) {
   }
 
   var mini = new Vizi.Object({layer: minimap.layer});
+  mini.name = options.name + " (Minimap)";
   mini.sight = options.sight;
 
   var geometry = new THREE.BoxGeometry(options.width, height, options.depth);

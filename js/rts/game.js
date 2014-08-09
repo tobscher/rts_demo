@@ -22,6 +22,7 @@ RTS.Game.prototype.initializeGame = function() {
 
 RTS.Game.prototype.addLight = function() {
   var light = new Vizi.Object();
+  light.name = "Main Light";
 
   var directionalLight = new Vizi.DirectionalLight({
     intensity: 1,
@@ -42,7 +43,8 @@ RTS.Game.prototype.addCamera = function() {
     far: 10000
   });
 
-  var camera = new Vizi.Object;
+  var camera = new Vizi.Object();
+  camera.name = "Main Camera";
   camera.addComponent(this.cam);
 
   this.app.addObject(camera);

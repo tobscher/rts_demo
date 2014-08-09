@@ -66,20 +66,25 @@ RTS.WorldObjectScript.prototype.update = function() {
 };
 
 RTS.WorldObjectScript.prototype.select = function() {
+  var me = RTS.HumanPlayer.instance;
+
   var object = this._object;
   var selectable = object.findNode("selectable").getComponent(RTS.SelectableScript);
-  var current = RTS.WorldObject.currentlySelected;
+  var selected = me.selection.selected;
 
-  if (current != null) {
-    var currentSelectable = current.findNode("selectable").getComponent(RTS.SelectableScript);
+  if (selected.length > 0) {
+    for (var i = 0; i < selected.length; i++) {
+      var current = selected[i];
+      var currentSelectable = current.findNode("selectable").getComponent(RTS.SelectableScript);
 
-    // Element is already selected
-    if (selectable == currentSelectable) return;
-    currentSelectable.hide();
+      // Element is already selected
+      if (selectable == currentSelectable) return;
+
+      currentSelectable.hide();
+    }
   };
 
   selectable.show();
 
-  RTS.WorldObject.currentlySelected = object;
-  RTS.HUD.instance.selection.setName(object.name);
+  me.selection.select(object);
 };

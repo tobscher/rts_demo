@@ -42,6 +42,7 @@ RTS.Minimap.Wrapper.prototype.addViewport = function() {
 
 RTS.Minimap.Wrapper.prototype.addLight = function() {
   var light = new Vizi.Object({ layer: this.layer });
+  light.name = "Light (Minimap)";
   var directionalLight = new Vizi.DirectionalLight({
     intensity: 1,
     direction: new THREE.Vector3(0, -1, 0)
