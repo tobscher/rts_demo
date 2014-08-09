@@ -1,4 +1,6 @@
 RTS.Minimap.WorldObject = function(player, options) {
+  options = options || {};
+
   var minimap = RTS.Minimap.instance;
   var color = player.colour;
   var height = 1;
@@ -10,6 +12,8 @@ RTS.Minimap.WorldObject = function(player, options) {
   }
 
   var mini = new Vizi.Object({layer: minimap.layer});
+  mini.sight = options.sight;
+
   var geometry = new THREE.BoxGeometry(options.width, height, options.depth);
   var material = new THREE.MeshBasicMaterial({ color: color});
   var visual = new Vizi.Visual({

@@ -62,7 +62,7 @@ RTS.Minimap.FogOfWar.getTexture = function() {
   this.ctxExplored.canvas.width = 1024;
   this.ctxExplored.canvas.height = 1024;
 
-  this.ctx.fillStyle = "rgb(200,200,200)";
+  this.ctx.fillStyle = "rgb(160,160,160)";
   this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
 
   this.texture = new THREE.Texture(this.ctx.canvas);
@@ -80,12 +80,12 @@ RTS.Minimap.FogOfWar.drawCircle = function(vector) {
   };
 
   this.ctxExplored.beginPath();
-  this.ctxExplored.fillStyle = 'rgb(128,128,128)';
+  this.ctxExplored.fillStyle = 'rgb(64,64,64)';
   this.ctxExplored.arc(translated.x, translated.y, 50, 0, 2*Math.PI);
   this.ctxExplored.fill();
 
   // this.ctx.globalCompositeOperation = "xor";
-  this.ctx.fillStyle = "rgb(200,200,200)";
+  this.ctx.fillStyle = "rgb(160,160,160)";
   this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
 
   this.ctx.drawImage(this.ctxExplored.canvas,0,0);
@@ -94,7 +94,7 @@ RTS.Minimap.FogOfWar.drawCircle = function(vector) {
     var object = RTS.HumanPlayer.instance.worldObjects[i];
     this.ctx.beginPath();
     this.ctx.fillStyle = 'rgb(0,0,0)';
-    this.ctx.arc(object.x + offset, object.z + offset, 50, 0, 2*Math.PI);
+    this.ctx.arc(object.transform.position.x + offset, object.transform.position.z + offset, object.sight, 0, 2*Math.PI);
     this.ctx.fill();
   }
 

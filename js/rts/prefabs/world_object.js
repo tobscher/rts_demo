@@ -25,6 +25,7 @@ RTS.WorldObject = function(object, player, options) {
   });
 
   object.id = options.id;
+  object.sight = options.sight;
 
   var game = RTS.Game.instance;
 
@@ -54,7 +55,7 @@ RTS.WorldObjectScript.prototype.realize = function() {
   object.mini.transform.position.copy(this.location);
 
   if (this.owner == me.id) {
-    RTS.HumanPlayer.instance.worldObjects.push(object.mini.transform.position);
+    RTS.HumanPlayer.instance.worldObjects.push(object.mini);
     RTS.Minimap.FogOfWar.drawCircle(object.mini.transform.position);
   }
 
