@@ -27,7 +27,7 @@
 
     color: #888;
 
-    background: rgb(29, 49, 68);
+    background: #222;
 
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
@@ -50,7 +50,7 @@
       bottom: 0px;
       width: 212px;
       height: 220px;
-      background-color: #f00;
+      background-color: #222;
 
       pointer-events: none;
 
@@ -59,14 +59,20 @@
 
     #selection {
       position: absolute;
-      left: 214px;
+      left: 212px;
+      right: 220px;
       bottom: 0px;
-      width: 100%;
-      height: 220px;
+      height: 200px;
       background-color: #111;
+      padding: 10px;
 
       border-left: 2px solid #ccc;
       pointer-events: none;
+
+      .selection-name {
+        color: #444;
+        text-align: center;
+      }
     }
 
     #orders {

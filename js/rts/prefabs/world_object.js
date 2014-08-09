@@ -97,4 +97,5 @@ RTS.WorldObjectScript.prototype.select = function() {
   selectable.show();
 
   RTS.WorldObject.currentlySelected = object;
+  RTS.HUD.instance.updateSelection(object.name);
 };
