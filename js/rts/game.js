@@ -17,28 +17,8 @@ RTS.Game.instance = null;
 
 RTS.Game.prototype.initializeGame = function() {
   this.addCamera();
-  this.addHUD();
   this.addMinimap();
   this.addLight();
-};
-
-RTS.Game.prototype.addHUD = function() {
-  var graphics = Vizi.Graphics.instance;
-
-  var hudCamera = new THREE.PerspectiveCamera( 45,
-    		this.container.offsetWidth / 220, 1, 10000 );
-  this.hudLayer = graphics.addLayer("hud", hudCamera, {
-    viewport: { x: 0, y: 0, width: this.container.offsetWidth, height: 220 },
-    position: new THREE.Vector3(0, 0, 10),
-    autoClearColor: true,
-    clear: true,
-    clearColor: { color: 0x444444, alpha: 1 },
-  });
-
-  this.hudLayer.onWindowResize = function(width, height) {
-    this.setViewport(0,0,width, 220);
-    Vizi.Layer.prototype.onWindowResize.call(this, width, height);
-  };
 };
 
 RTS.Game.prototype.addLight = function() {
