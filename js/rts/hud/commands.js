@@ -6,18 +6,30 @@ RTS.HUD.Commands = function(container) {
 RTS.HUD.Commands.prototype.set = function(commands) {
   this.grid.empty();
 
+  var rowCount = 1;
+  var row = $("<div></div>").addClass("row").addClass("row-1");
+
   for (var i = 0; i < commands.length; i++) {
     var command = commands[i];
-    this.add(command);
+    var newCommand = this.add(command);
+    row.append(newCommand);
   }
+
+  this.grid.append(row);
 };
 
 RTS.HUD.Commands.prototype.add = function(command) {
   var element = $("<div></div>").addClass("command").addClass(command.name);
-  var message = $("<div></div>").html(command.message);
   var image = $("<img>").attr("src", command.icon);
   element.append(image);
-  element.append(message);
 
-  this.grid.append(element);
+  if (!command.span) {
+    element.addClass("cell");
+  } else {
+    element.addClass("spanned-cell");
+    var message = $("<div></div>").html(command.message);
+    element.append(message);
+  }
+
+  return element;
 };
