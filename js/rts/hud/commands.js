@@ -20,7 +20,7 @@ RTS.HUD.Commands.prototype.set = function(commands) {
 
 RTS.HUD.Commands.prototype.add = function(command) {
   var element = $("<div></div>").addClass("command").addClass(command.name);
-  var image = $("<img>").attr("src", command.icon);
+  var image = $("<embed />").attr("src", command.icon);
   element.append(image);
 
   if (!command.span) {
