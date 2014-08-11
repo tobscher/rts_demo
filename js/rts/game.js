@@ -43,6 +43,12 @@ RTS.Game.prototype.addCamera = function() {
     far: 10000
   });
 
+  var folder = this.gui.addFolder('Main Camera');
+  var position = folder.addFolder("Position");
+  position.add(this.cam.position, "x").listen();
+  position.add(this.cam.position, "y").listen();
+  position.add(this.cam.position, "z").listen();
+
   var camera = new Vizi.Object();
   camera.name = "Main Camera";
   camera.addComponent(this.cam);
