@@ -11,25 +11,36 @@ RTS.HUD.Commands.prototype.set = function(commands) {
 
   for (var i = 0; i < commands.length; i++) {
     var command = commands[i];
-    var newCommand = this.add(command);
-    row.append(newCommand);
+    this.add(command, function(newCommand) {
+      row.append(newCommand);
+    });
   }
 
   this.grid.append(row);
 };
 
-RTS.HUD.Commands.prototype.add = function(command) {
+RTS.HUD.Commands.prototype.add = function(command, callback) {
   var element = $("<div></div>").addClass("command").addClass(command.name);
-  var image = $("<embed />").attr("src", command.icon);
-  element.append(image);
 
-  if (!command.span) {
-    element.addClass("cell");
-  } else {
-    element.addClass("spanned-cell");
-    var message = $("<div></div>").html(command.message);
-    element.append(message);
-  }
+  $.ajax(command.icon, {
+    dataType: "html",
+    success: function(data, textStatus, jqXHR) {
+      var image = data;
+      element.append(image);
 
-  return element;
+      if (!command.span) {
+        element.addClass("cell");
+      } else {
+        element.addClass("spanned-cell");
+        var message = $("<div></div>").html(command.message);
+        element.append(message);
+      }
+
+      element.on("click", function() {
+        command.execute();
+      });
+
+      callback(element);
+    }
+  });
 };
