@@ -4,8 +4,18 @@ RTS.Buildings.CommandCentre = function(object, player, options) {
 
   RTS.WorldObject.call(this, object, player, options);
 
-  object.commands.push(new RTS.Commands.BuildSCV());
+  // Commands
+  object.commands.push(new RTS.Commands.BuildSCV(object));
 
+  // Abilities
+  var training = new RTS.Abilities.Training();
+  object.addChild(training);
+
+  object.train = function(build) {
+    training.push(build);
+  };
+
+  // Transform
   object.transform.scale.set(5, 5, 5);
   return object;
 };

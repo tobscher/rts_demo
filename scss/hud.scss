@@ -70,8 +70,80 @@
       pointer-events: none;
 
       .selection-name {
+        height: 30px;
         color: #444;
         text-align: center;
+      }
+
+      #build_queue {
+        height: 150px;
+        width: 75%;
+        margin: 20px auto;
+
+        .build_queue-current {
+          width: 100%;
+          height: 64px;
+          clear: left;
+
+          margin-left: -5px;
+
+          .build_queue-current-1 {
+            float: left;
+            width: 64px;
+            height: 64px;
+            background-color: #222;
+            border: 1px solid #444;
+            box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+          }
+
+          .build_queue-current-progress {
+            float: left;
+            width: 180px;
+            height: 10px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            margin: 45px 10px 0px 20px;
+            padding: 2px;
+
+            .build_queue-current-progress-meter {
+              width: 0%;
+              height: 100%;
+
+              background: #c9de96; /* Old browsers */
+              background: -moz-linear-gradient(top,  #c9de96 0%, #8ab66b 44%, #398235 100%); /* FF3.6+ */
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9de96), color-stop(44%,#8ab66b), color-stop(100%,#398235)); /* Chrome,Safari4+ */
+              background: -webkit-linear-gradient(top,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* Chrome10+,Safari5.1+ */
+              background: -o-linear-gradient(top,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* Opera 11.10+ */
+              background: -ms-linear-gradient(top,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* IE10+ */
+              background: linear-gradient(to bottom,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* W3C */
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9de96', endColorstr='#398235',GradientType=0 ); /* IE6-9 */
+
+            }
+          }
+        }
+
+        .build_queue-next {
+          margin-top: 20px;
+          width: 100%;
+          height: 64px;
+
+          .build_queue-next-2, .build_queue-next-3, .build_queue-next-4, .build_queue-next-5  {
+            float: left;
+            width: 48px;
+            height: 48px;
+            background-color: #222;
+            border: 1px solid #444;
+            box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+
+            margin: 10px;
+          }
+
+          clear: both;
+        }
       }
     }
 
