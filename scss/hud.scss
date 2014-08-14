@@ -96,6 +96,11 @@
             box-sizing:border-box;
             -moz-box-sizing:border-box;
             -webkit-box-sizing:border-box;
+
+            span {
+              font-size: 42pt;
+              padding-left: 15px;
+            }
           }
 
           .build_queue-current-progress {
@@ -140,6 +145,11 @@
             -webkit-box-sizing:border-box;
 
             margin: 10px;
+
+            span {
+              font-size: 32pt;
+              padding-left: 10px;
+            }
           }
 
           clear: both;

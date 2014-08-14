@@ -60,11 +60,13 @@ RTS.Abilities.TrainingScript.prototype.push = function(build) {
   }
 
   this.builds.push(build);
+
+  this.hud.buildQueue.push(build);
 };
 
 RTS.Abilities.TrainingScript.prototype.finish = function() {
   this.builds.shift();
-  this.hud.buildQueue.update(0);
+  this.hud.buildQueue.shift();
 
   this.current = null;
   this.building = false;

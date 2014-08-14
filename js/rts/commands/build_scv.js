@@ -10,7 +10,8 @@ RTS.Commands.BuildSCV = function(commandCentre) {
 RTS.Commands.BuildSCV.prototype.execute = function() {
   var build = {
     type: RTS.Units.SCV,
-    duration: this.duration
+    duration: this.duration,
+    icon: this.icon
   };
 
   this.commandCentre.train(build);
